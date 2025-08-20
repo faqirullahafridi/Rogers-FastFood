@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roger's Restaurant - Legendary Flavors</title>
+    
+    <!-- Performance Optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1567620834-9f8390b6e60b?w=400&h=300&fit=crop&crop=center">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop&crop=center">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        /* Performance optimizations */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        
+
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #8B7355 0%, #A0522D 50%, #CD853F 100%);
+            --secondary-gradient: linear-gradient(135deg, #D2691E 0%, #F4A460 50%, #DEB887 100%);
+            --luxury-gradient: linear-gradient(135deg, #8B7355 0%, #A0522D 25%, #CD853F 50%, #DEB887 75%, #F5F5DC 100%);
+            --dark-gradient: linear-gradient(135deg, #F5F5DC 0%, #FAEBD7 50%, #FFF8DC 100%);
+            --glass-bg: rgba(245, 245, 220, 0.1);
+            --glass-border: rgba(139, 115, 85, 0.2);
+            --text-primary: #2F2F2F;
+            --text-secondary: #5D5D5D;
+            --text-light: #2F2F2F;
+            --surface: #F5F5DC;
+            --surface-dark: rgba(139, 115, 85, 0.05);
+            --shadow-sm: 0 2px 8px rgba(139, 115, 85, 0.1);
+            --shadow-md: 0 8px 25px rgba(139, 115, 85, 0.15);
+            --shadow-lg: 0 25px 50px -12px rgba(139, 115, 85, 0.2);
+            --shadow-luxury: 0 35px 60px -12px rgba(139, 115, 85, 0.3);
+            --border-radius: 20px;
+            --glow: 0 0 30px rgba(139, 115, 85, 0.3);
+        }
+        
+        body {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(139, 115, 85, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(210, 180, 140, 0.1) 0%, transparent 50%),
+                var(--dark-gradient);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%238B7355' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='m0 40l40-40h-40v40z'/%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 24px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--surface);
+            opacity: 0.95;
+            z-index: -1;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.05em;
+        }
+        
+        .nav-items {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-item {
+            cursor: pointer;
+            font-weight: 500;
+            padding: 12px 20px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--text-secondary);
+            position: relative;
+        }
+        
+        .nav-item:hover {
+            background: rgba(139, 115, 85, 0.1);
+            color: var(--text-light);
+        }
+        
+        .nav-item.active {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(139, 115, 85, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(210, 180, 140, 0.15) 0%, transparent 40%),
+                var(--dark-gradient);
+            height: 100vh;
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(139, 115, 85, 0.08) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(210, 180, 140, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 40% 60%, rgba(139, 115, 85, 0.03) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+        
+        .hero-title {
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            margin-bottom: 32px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.0;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            margin-bottom: 50px;
+            opacity: 0.95;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        .order-btn {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            border: none;
+            padding: 18px 48px;
+            font-size: 1.1rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .order-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 120px 0;
+            position: relative;
+            background: var(--surface);
+            scroll-margin-top: 100px;
+        }
+        
+        section:nth-child(even) {
+            background: rgba(139, 115, 85, 0.05);
+        }
+        
+        #about {
+            background: #F5F5DC;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+        }
+        
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+        
+        .menu-item {
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(139, 115, 85, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            border-color: rgba(139, 115, 85, 0.4);
+        }
+        
+        .menu-item-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        
+        .fallback-image {
+            width: 100%;
+            height: 100%;
+            background: var(--surface);
+            display: none;
+        }
+        
+        .menu-item-content {
+            padding: 24px;
+            background: var(--surface);
+        }
+        
+        .menu-item-title {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .menu-item-desc {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .menu-item-price {
+            font-weight: 700;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.25rem;
+        }
+        
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 60px;
+            padding: 8px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            max-width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .category-tab {
+            background: transparent;
+            color: var(--text-secondary);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        .category-tab.active {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+        }
+        
+        .category-tab:hover:not(.active) {
+            background: rgba(139, 115, 85, 0.1);
+            color: var(--text-light);
+        }
+        
+        /* Footer */
+        footer {
+            background: #FAEBD7;
+            color: var(--text-light);
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(139, 115, 85, 0.2);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 24px;
+            font-size: 1.4rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        .footer-section p {
+            margin-bottom: 16px;
+            color: rgba(47, 47, 47, 0.8);
+            line-height: 1.6;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(139, 115, 85, 0.2);
+            font-size: 0.9rem;
+            color: rgba(47, 47, 47, 0.7);
+        }
+        
+        .contact-info {
+            margin-top: 32px;
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            color: rgba(47, 47, 47, 0.9);
+        }
+        
+        .contact-info i {
+            width: 20px;
+            color: #8B7355;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            background: var(--glass-bg);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 0;
+            }
+            
+            nav {
+                position: relative;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .nav-items {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-radius: 16px;
+                border: 1px solid var(--glass-border);
+                box-shadow: var(--shadow-lg);
+                flex-direction: column;
+                gap: 8px;
+                padding: 20px;
+                margin-top: 16px;
+                transform: translateY(-20px);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            .nav-items.mobile-open {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .hero {
+                height: 80vh;
+                min-height: 600px;
+                padding-top: 80px;
+            }
+            
+            .category-tabs {
+                flex-direction: column;
+                max-width: 100%;
+                padding: 12px;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            .footer-content {
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .hero {
+                min-height: 500px;
+            }
+            
+            .menu-item-content {
+                padding: 20px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Menu Data with High-Quality Pexels Images
+        const menuData = {
+            starters: [
+                { name: "Oven Baked Wings (6 PCS)", description: "With dip", price: "Rs.400", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Oven Baked Wings (12 PCS)", description: "", price: "Rs.800", image: "https://images.pexels.com/photos/27645103/pexels-photo-27645103.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Flaming Wings (6 PCS)", description: "With dip", price: "Rs.450", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Flaming Wings (12 PCS)", description: "", price: "Rs.900", image: "https://images.pexels.com/photos/27645103/pexels-photo-27645103.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Mexican Chicken Sandwich", description: "Lack pepper chicken with fresh tomatoes", price: "Rs.650", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Pizza Stacker", description: "", price: "Rs.950", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Euro Sandwich", description: "Chicken tikka with special sauce cheese, lettuce, and pineapples in soft and crispy buns, served with fries", price: "Rs.650", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Wings (5 PCS)", description: "", price: "Rs.320", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Pizza Fries", description: "", price: "Rs.700", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Starter Platter", description: "4 pcs behari rolls, 6 pcs wings with fries and dip sauce", price: "Rs.1000", image: "https://images.pexels.com/photos/27645103/pexels-photo-27645103.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Roll Platter", description: "4 pcs arabic rolls with fries and dip sauce", price: "Rs.1000", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Chicken Nuggets", description: "4 pcs / Rs.250, 6 pcs / Rs.370", price: "Rs.250-370", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Zinger Burger", description: "", price: "Rs.430", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Arabic Roll", description: "", price: "Rs.480", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Behari Roll", description: "", price: "Rs.480", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Mighty Zinger", description: "", price: "Rs.700", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Patty Burger", description: "", price: "Rs.320", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Cheese Sticks", description: "Freshly baked bread filled with yummy cheese blend, served with sauce", price: "Rs.480", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Crunchy Pasta", description: "Yummy macaroni pasta in white sauce topped with crispy chicken and cheese", price: "Rs.850", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Fettuccine Alfredo Pasta", description: "White sauce with mushrooms and chicken chunks", price: "Small Rs.500 / Large Rs.850", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Calzone Chunks", description: "", price: "Rs.950", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Fries", description: "", price: "Small Rs.250 / Large Rs.350", image: "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+            ],
+            pizza: [
+                { name: "Roger Legend Flavours", description: "", price: "Small Rs.500 / Medium Rs.1000 / Large Rs.1400 / Family Rs.2000", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Signature Pizza Crown Crust", description: "", price: "Rs.1600-2200", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Roger Special Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Creamy Tikka", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Chicken Tikka Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Chicken Fajita Pizza", description: "Peppers with special herbs and spice", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Chicken Supreme", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Very Veggie", description: "Black olive, mozzarella cheese, jalapeno and lots of cheese", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Classic Pepperoni", description: "Meaty feast of pepperoni, mozzarella cheese and tomato sauce", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Calzone", description: "Sauce and lots of cheese", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Lebonani", description: "Chicken tikka, mozzarella cheese", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Tika Supreme", description: "Chicken tikka, cheese, special sauce", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Behari Kabab", description: "Mozzarella cheese", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Stuffed Kabab Two Flavour Pizza", description: "Choose your flavour", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Two Flavour Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Hot & Spicy", description: "Fajita chicken, onion, capsicum, jalapeno, tomato", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Euro Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Chicken Sausage", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Cheese Lover", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Extreme Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Mushroom & Olives", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Tandoori Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "BBQ Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+            ],
+            deals: [
+                { name: "Four X Deal", description: "4 Small Pizza, 1.5L Cold Drink", price: "Rs.2100", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Double Up Deal", description: "2 Large Pizza, 1.5L Cold Drink", price: "Rs.2900", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Family Feast", description: "2 Family Pizza, 1.5L Cold Drink", price: "Rs.3950", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Do It Deal", description: "1 Large Pizza, 1 Starter Platter, 1.5L Cold Drink", price: "Rs.2450", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "2 Zinger Deal", description: "2 Zinger Burger, 1 Liter Drink", price: "Rs.1080", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Kids Deal", description: "Chicken Patty burger, Small Drink", price: "Rs.350", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+            ],
+            sauces: [
+                { name: "Mayo Sauce", description: "", price: "Rs.50", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Spicy Sauce", description: "", price: "Rs.50", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "BBQ Sauce", description: "", price: "Rs.50", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+            ],
+            addons: [
+                { name: "Cheese Crust", description: "", price: "Small Rs.150 / Medium Rs.200 / Large Rs.250 / Family Rs.350", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Kabab Crust", description: "", price: "Small Rs.250 / Medium Rs.380 / Large Rs.450", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Extra Topping", description: "", price: "Small Rs.80 / Medium Rs.120 / Large Rs.200 / Family Rs.250", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+            ]
+        };
+
+        function App() {
+            const [activeCategory, setActiveCategory] = useState('starters');
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+            const [activeNav, setActiveNav] = useState('home');
+
+            const handleNavClick = (target) => {
+                if (target === 'call') {
+                    window.location.href = 'tel:03321771772';
+                    return;
+                }
+                setActiveNav(target);
+                setMobileMenuOpen(false);
+                const el = document.getElementById(target);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            };
+
+            return (
+                <>
+                    <header>
+                        <div className="container">
+                            <nav>
+                                <div className="logo">ROGER'S</div>
+                                <button 
+                                    className="mobile-menu-toggle"
+                                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                >
+                                    <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+                                </button>
+                                <ul className={`nav-items ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+                                    <li 
+                                        className={`nav-item ${activeNav === 'home' ? 'active' : ''}`}
+                                        onClick={() => handleNavClick('home')}
+                                        role="button"
+                                        aria-label="Go to Home"
+                                    >Home</li>
+                                    <li 
+                                        className={`nav-item ${activeNav === 'menu' ? 'active' : ''}`}
+                                        onClick={() => handleNavClick('menu')}
+                                        role="button"
+                                        aria-label="Go to Menu"
+                                    >Menu</li>
+                                    <li 
+                                        className={`nav-item ${activeNav === 'about' ? 'active' : ''}`}
+                                        onClick={() => handleNavClick('about')}
+                                        role="button"
+                                        aria-label="Go to About"
+                                    >About</li>
+                                    <li 
+                                        className={`nav-item ${activeNav === 'contact' ? 'active' : ''}`}
+                                        onClick={() => handleNavClick('contact')}
+                                        role="button"
+                                        aria-label="Go to Contact"
+                                    >Contact</li>
+                                    <li 
+                                        className="nav-item"
+                                        onClick={() => handleNavClick('call')}
+                                        role="button"
+                                        aria-label="Call to Order"
+                                    >Order Online</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </header>
+                    
+                    <div id="home" className="hero">
+                        <div className="hero-content">
+                            <h2 className="hero-title">Roger's Legendary Flavors</h2>
+                            <p className="hero-subtitle">Experience the taste of perfection with our delicious fast food offerings</p>
+                            <button className="order-btn" onClick={() => handleNavClick('menu')}>Order Now</button>
+                        </div>
+                    </div>
+                    
+                    <section id="menu">
+                        <div className="container">
+                            <h2 className="section-title">Our Menu</h2>
+                            
+                            <div className="category-tabs">
+                                <button 
+                                    className={`category-tab ${activeCategory === 'starters' ? 'active' : ''}`}
+                                    onClick={() => setActiveCategory('starters')}
+                                >
+                                    Starters & More
+                                </button>
+                                <button 
+                                    className={`category-tab ${activeCategory === 'pizza' ? 'active' : ''}`}
+                                    onClick={() => setActiveCategory('pizza')}
+                                >
+                                    Pizzas
+                                </button>
+                                <button 
+                                    className={`category-tab ${activeCategory === 'deals' ? 'active' : ''}`}
+                                    onClick={() => setActiveCategory('deals')}
+                                >
+                                    Deals
+                                </button>
+                                <button 
+                                    className={`category-tab ${activeCategory === 'sauces' ? 'active' : ''}`}
+                                    onClick={() => setActiveCategory('sauces')}
+                                >
+                                    Sauces
+                                </button>
+                                <button 
+                                    className={`category-tab ${activeCategory === 'addons' ? 'active' : ''}`}
+                                    onClick={() => setActiveCategory('addons')}
+                                >
+                                    Add-ons
+                                </button>
+                            </div>
+                            
+                            <div className="menu-grid">
+                                {menuData[activeCategory].map((item, index) => (
+                                    <div className="menu-item" key={index}>
+                                        <div className="menu-item-image">
+                                            <img 
+                                                src={item.image} 
+                                                alt={item.name}
+                                                loading="lazy"
+                                                onError={(e) => {
+                                                    e.target.style.display = 'none';
+                                                    e.target.nextSibling.style.display = 'block';
+                                                }}
+                                            />
+                                            <div className="fallback-image"></div>
+                                        </div>
+                                        <div className="menu-item-content">
+                                            <h3 className="menu-item-title">{item.name}</h3>
+                                            <p className="menu-item-desc">{item.description}</p>
+                                            <div className="menu-item-price">{item.price}</div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="about">
+                        <div className="container">
+                            <h2 className="section-title">About Us</h2>
+                            <div style={{maxWidth: '800px', margin: '0 auto', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: 1.8}}>
+                                Roger's Restaurant blends classic recipes with a modern twist. From our legendary pizzas to sizzling wings and gourmet sandwiches, we craft every bite with premium ingredients and a passion for flavor.
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <footer id="contact">
+                        <div className="container">
+                            <div className="footer-content">
+                                <div className="footer-section">
+                                    <h3>Roger's Restaurant</h3>
+                                    <p>Experience the legendary flavors that have made us a favorite fast food destination.</p>
+                                </div>
+                                
+                                <div className="footer-section">
+                                    <h3>Contact Us</h3>
+                                    <div className="contact-info">
+                                        <p><i className="fas fa-map-marker-alt"></i> Ibrahim Market Phase 6 Sector F3 Block 5 Shop 1</p>
+                                        <p><i className="fas fa-phone"></i> 0332-1771772</p>
+                                        <p><i className="fas fa-clock"></i> Open Daily: 11:00 AM - 11:00 PM</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="footer-section">
+                                    <h3>Free Home Delivery</h3>
+                                    <p>Call us to place your order for free home delivery</p>
+                                    <button className="order-btn">Call Now: 0332-1771772</button>
+                                </div>
+                            </div>
+                            <div className="copyright">
+                                &copy; {new Date().getFullYear()} Roger's Restaurant. All Rights Reserved.
+                            </div>
+                        </div>
+                    </footer>
+                </>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
