@@ -72,8 +72,8 @@ A modern, responsive restaurant website showcasing Roger's Restaurant's deliciou
 ### Quick Start
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/rogers-restaurant.git
-   cd rogers-restaurant
+   https://github.com/faqirullahafridi/Rogers-FastFood.git
+   cd Rogers-FastFood
    ```
 
 2. Open `rogers.html` in your web browser
@@ -205,16 +205,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Fonts**: [Google Fonts](https://fonts.google.com) for typography
 - **React**: [Facebook](https://reactjs.org) for the amazing framework
 
-## 📞 Contact
-
-**Roger's Restaurant**
-- 📍 Location: Ibrahim Market Phase 6 Sector F3 Block 5 Shop 1
-- 📞 Phone: 0332-1771772
-- 🕒 Hours: Daily 11:00 AM - 11:00 PM
-- 🚚 Free Home Delivery Available
-
----
-
-⭐ **Star this repository if you found it helpful!**
-
-🍕 **Order now and experience Roger's Legendary Flavors!**
