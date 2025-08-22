@@ -12,29 +12,197 @@
     <link rel="dns-prefetch" href="https://images.unsplash.com">
     
     <!-- Preload critical images -->
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1567620834-9f8390b6e60b?w=400&h=300&fit=crop&crop=center">
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop&crop=center">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Preload links removed to prevent warnings -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ===== ULTIMATE RESPONSIVE SYSTEM ===== -->
+    <link rel="stylesheet" href="responsive-design.css?v=4.0">
+    <link rel="stylesheet" href="performance-styles.css?v=4.0">
+    
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script>
         // Check if React is loaded
-        window.addEventListener('load', function() {
-            if (typeof React === 'undefined') {
-                alert('React failed to load!');
-            } else {
-                console.log('React loaded successfully');
-            }
-        });
+        
+        // Modern Icon Components - Lucide-inspired SVG icons
+        const Icons = {
+            Search: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('circle', { cx: '11', cy: '11', r: '8' }),
+                    React.createElement('path', { d: 'm21 21-4.35-4.35' })
+                )
+            ),
+            ShoppingCart: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M3 3h2l.4 2M7 13h10l4-8H5.4m1.6 8L6 6H4m3 7v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2 2v-6m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm6 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z' })
+                )
+            ),
+            Menu: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('line', { x1: '4', x2: '20', y1: '6', y2: '6' }),
+                    React.createElement('line', { x1: '4', x2: '20', y1: '12', y2: '12' }),
+                    React.createElement('line', { x1: '4', x2: '20', y1: '18', y2: '18' })
+                )
+            ),
+            X: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M18 6 6 18' }),
+                    React.createElement('path', { d: 'm6 6 12 12' })
+                )
+            ),
+            Plus: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M5 12h14' }),
+                    React.createElement('path', { d: 'm12 5 0 14' })
+                )
+            ),
+            Minus: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M5 12h14' })
+                )
+            ),
+            Trash2: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M3 6h18' }),
+                    React.createElement('path', { d: 'M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6' }),
+                    React.createElement('path', { d: 'M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2' }),
+                    React.createElement('line', { x1: '10', x2: '10', y1: '11', y2: '17' }),
+                    React.createElement('line', { x1: '14', x2: '14', y1: '11', y2: '17' })
+                )
+            ),
+            ArrowUp: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'm7 14 5-5 5 5' })
+                )
+            ),
+            ArrowDown: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'm7 10 5 5 5-5' })
+                )
+            ),
+            Phone: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' })
+                )
+            ),
+            Truck: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2' }),
+                    React.createElement('path', { d: 'M15 18H9' }),
+                    React.createElement('path', { d: 'M19 18h2a1 1 0 0 0 1-1v-3.28a1 1 0 0 0-.684-.948l-1.923-.641a1 1 0 0 1-.578-.502l-1.539-3.076A1 1 0 0 0 16.382 8H14' }),
+                    React.createElement('circle', { cx: '17', cy: '18', r: '2' }),
+                    React.createElement('circle', { cx: '7', cy: '18', r: '2' })
+                )
+            ),
+            UtensilsCrossed: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'm16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8' }),
+                    React.createElement('path', { d: 'M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7' }),
+                    React.createElement('path', { d: 'm2.1 21.9 6.4-6.4' })
+                )
+            ),
+            Pizza: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M15 11h.01' }),
+                    React.createElement('path', { d: 'M11 15h.01' }),
+                    React.createElement('path', { d: 'M16 16h.01' }),
+                    React.createElement('path', { d: 'm2 16 20 6-6-20A20 20 0 0 0 2 16' }),
+                    React.createElement('path', { d: 'M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4' })
+                )
+            ),
+            Clock: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('circle', { cx: '12', cy: '12', r: '10' }),
+                    React.createElement('polyline', { points: '12,6 12,12 16,14' })
+                )
+            ),
+            Heart: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' })
+                )
+            ),
+            Star: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('polygon', { points: '12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26' })
+                )
+            ),
+            Award: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('circle', { cx: '12', cy: '8', r: '6' }),
+                    React.createElement('path', { d: 'm15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-2.58-2.687a1 1 0 0 0-1.197 0l-2.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526' })
+                )
+            ),
+            Zap: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z' })
+                )
+            ),
+            Users: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' }),
+                    React.createElement('circle', { cx: '9', cy: '7', r: '4' }),
+                    React.createElement('path', { d: 'M22 21v-2a4 4 0 0 0-3-3.87' }),
+                    React.createElement('path', { d: 'M16 3.13a4 4 0 0 1 0 7.75' })
+                )
+            ),
+            MapPin: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z' }),
+                    React.createElement('circle', { cx: '12', cy: '10', r: '3' })
+                )
+            ),
+            Home: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'm3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' }),
+                    React.createElement('polyline', { points: '9,22 9,12 15,12 15,22' })
+                )
+            ),
+            Cake: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8' }),
+                    React.createElement('path', { d: 'M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1' }),
+                    React.createElement('path', { d: 'M2 21h20' }),
+                    React.createElement('path', { d: 'M7 8v3' }),
+                    React.createElement('path', { d: 'M12 8v3' }),
+                    React.createElement('path', { d: 'M17 8v3' })
+                )
+            ),
+            MessageCircle: () => React.createElement('span', { className: 'icon' }, 
+                React.createElement('svg', { viewBox: '0 0 24 24' }, 
+                    React.createElement('path', { d: 'M7.9 20A9 9 0 1 0 4 16.1L2 22Z' })
+                )
+            )
+        };
+
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Modern Icon System - Using inline SVG icons for better performance and customization -->
     <style>
+        .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            stroke-width: 2;
+            stroke: currentColor;
+            fill: none;
+            flex-shrink: 0;
+            vertical-align: middle;
+        }
+        .icon svg {
+            width: 100%;
+            height: 100%;
+        }
+        .icon-sm { width: 0.875em; height: 0.875em; }
+        .icon-lg { width: 1.25em; height: 1.25em; }
+        .icon-xl { width: 1.5em; height: 1.5em; }
+        .icon-2xl { width: 2em; height: 2em; }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
         html {
@@ -52,17 +220,17 @@
         }
         
         :root {
-            /* E-commerce Color Palette */
-            --primary: #0f172a;
-            --primary-dark: #020617;
-            --primary-light: #334155;
-            --secondary: #dc2626;
-            --secondary-dark: #b91c1c;
-            --accent: #059669;
-            --accent-light: #10b981;
-            --success: #16a34a;
-            --warning: #ca8a04;
-            --error: #dc2626;
+            /* KFC Pakistan Color Palette */
+            --primary: #e4002b;
+            --primary-dark: #c5001f;
+            --primary-light: #ff1744;
+            --secondary: #ffffff;
+            --secondary-dark: #f5f5f5;
+            --accent: #000000;
+            --accent-light: #333333;
+            --success: #00b894;
+            --warning: #ffc107;
+            --error: #e4002b;
             
             /* E-commerce Neutrals */
             --white: #ffffff;
@@ -153,7 +321,7 @@
         }
         
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
             font-weight: 600;
             color: var(--text-primary);
             letter-spacing: -0.025em;
@@ -172,46 +340,32 @@
             padding: 0 var(--space-6);
         }
         
-                 /* Enhanced E-commerce Header */
+                 /* Modern Shopify-style Header */
          header {
-             background: rgba(255, 255, 255, 0.95);
-             border-bottom: 1px solid var(--gray-200);
+             background: rgba(255, 255, 255, 0.98);
+             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
              padding: 0;
              position: fixed;
              top: 0;
              left: 0;
              right: 0;
              z-index: 1000;
-             box-shadow: var(--shadow-lg);
-             -webkit-backdrop-filter: blur(10px);
-             backdrop-filter: blur(10px);
+             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+             -webkit-backdrop-filter: blur(20px);
+             backdrop-filter: blur(20px);
          }
          
          .header-top {
-             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-             color: var(--text-light);
-             padding: var(--space-3) 0;
-             font-size: 0.9rem;
+             background: var(--primary);
+             color: var(--secondary);
+             padding: var(--space-2) 0;
+             font-size: 0.85rem;
+             font-weight: 500;
              text-align: center;
              position: relative;
-             overflow: hidden;
          }
          
-         .header-top::before {
-             content: '';
-             position: absolute;
-             top: 0;
-             left: -100%;
-             width: 100%;
-             height: 100%;
-             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-             animation: shimmer 3s infinite;
-         }
-         
-         @keyframes shimmer {
-             0% { left: -100%; }
-             100% { left: 100%; }
-         }
+
          
          .header-top p {
              position: relative;
@@ -232,8 +386,8 @@
              padding: var(--space-1) var(--space-3);
              border-radius: var(--radius-lg);
              background: rgba(255, 255, 255, 0.1);
-             backdrop-filter: blur(5px);
              -webkit-backdrop-filter: blur(5px);
+             backdrop-filter: blur(5px);
              transition: all 0.3s ease;
          }
          
@@ -248,8 +402,9 @@
          }
          
          .header-main {
-             padding: var(--space-5) 0;
-             background: var(--bg-primary);
+             padding: var(--space-4) 0;
+             background: var(--secondary);
+             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
          }
         
                  nav {
@@ -270,10 +425,9 @@
              border-radius: var(--radius-lg);
          }
          
-         .logo:hover {
-             transform: scale(1.05);
-             background: var(--gray-50);
-         }
+                 .logo:hover {
+            transform: scale(1.05);
+        }
          
          .logo-icon {
              width: 60px;
@@ -281,7 +435,6 @@
              border-radius: var(--radius-lg);
              overflow: hidden;
              flex-shrink: 0;
-             box-shadow: var(--shadow-md);
              transition: all 0.3s ease;
          }
          
@@ -291,16 +444,15 @@
              object-fit: cover;
              object-position: center;
              transition: all 0.3s ease;
-             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+             mix-blend-mode: multiply;
+             filter: contrast(1.2) brightness(1.1);
          }
          
          .logo:hover .logo-icon {
              transform: scale(1.1);
-             box-shadow: var(--shadow-lg);
          }
          
          .logo:hover .logo-image {
-             filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
          }
          
          .fallback-logo {
@@ -309,7 +461,6 @@
              display: flex;
              align-items: center;
              justify-content: center;
-             background: var(--gray-100);
              color: var(--gray-500);
              font-size: 2rem;
          }
@@ -327,14 +478,11 @@
          }
          
          .logo-main {
-             font-family: 'Playfair Display', serif;
-             font-size: 2rem;
-             font-weight: 800;
-             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-             -webkit-background-clip: text;
-             -webkit-text-fill-color: transparent;
-             background-clip: text;
-             letter-spacing: -0.05em;
+             font-family: 'Space Grotesk', sans-serif;
+             font-size: 1.8rem;
+             font-weight: 700;
+             color: var(--primary);
+             letter-spacing: -0.02em;
          }
          
          .logo-tagline {
@@ -348,58 +496,7 @@
          }
         
                  /* Enhanced Logo - Duplicate removed */
-        
-                 .nav-items {
-             display: flex;
-             list-style: none;
-             gap: var(--space-6);
-             align-items: center;
-         }
-         
-         .nav-item {
-             cursor: pointer;
-             font-weight: 600;
-             padding: var(--space-3) var(--space-5);
-             border-radius: var(--radius-lg);
-             color: var(--text-secondary);
-             position: relative;
-             transition: all 0.3s ease;
-             font-size: 0.95rem;
-             letter-spacing: 0.5px;
-         }
-         
-         .nav-item::before {
-             content: '';
-             position: absolute;
-             bottom: 0;
-             left: 50%;
-             width: 0;
-             height: 2px;
-             background: linear-gradient(90deg, var(--secondary), var(--primary));
-             transition: all 0.3s ease;
-             transform: translateX(-50%);
-         }
-         
-         .nav-item:hover {
-             background: var(--gray-50);
-             color: var(--text-primary);
-             transform: translateY(-2px);
-         }
-         
-         .nav-item:hover::before {
-             width: 80%;
-         }
-         
-         .nav-item.active {
-             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-             color: var(--text-light);
-             box-shadow: var(--shadow-md);
-         }
-         
-         .nav-item.active::before {
-             width: 80%;
-             background: var(--text-light);
-         }
+                 /* Navigation styles moved to responsive-design.css */
         
         .cart-icon {
             position: relative;
@@ -417,13 +514,13 @@
             transform: scale(1.1);
         }
         
-        .cart-icon i {
+        .cart-icon .icon {
             font-size: 1.3rem;
             color: var(--primary);
             transition: all 0.3s ease;
         }
         
-        .cart-icon:hover i {
+        .cart-icon:hover .icon {
             color: var(--secondary);
         }
          
@@ -483,7 +580,7 @@
              background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
              color: var(--text-light);
              border-radius: var(--radius-full);
-             width: 24px;
+             min-width: 24px;
              height: 24px;
              display: flex;
              align-items: center;
@@ -493,6 +590,8 @@
              border: 2px solid var(--bg-primary);
              box-shadow: var(--shadow-md);
              animation: pulse 2s infinite;
+             z-index: 10;
+             padding: 0 4px;
          }
          
          @keyframes pulse {
@@ -503,16 +602,16 @@
         
                  /* Enhanced E-commerce Hero Section */
          .hero {
-             background: linear-gradient(135deg, var(--primary) 0%, var(--gray-800) 50%, var(--secondary) 100%);
-             min-height: 90vh;
+             min-height: 100vh;
+             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+             position: relative;
+             overflow: hidden;
              display: flex;
              align-items: center;
              justify-content: center;
-             color: var(--text-light);
              text-align: center;
-             position: relative;
-             overflow: hidden;
-             padding-top: 180px;
+             padding-top: 160px;
+             padding-bottom: var(--space-12);
          }
          
          .hero::before {
@@ -522,37 +621,50 @@
              left: 0;
              width: 100%;
              height: 100%;
-             background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-             opacity: 0.15;
-             z-index: 0;
-             animation: slowZoom 20s infinite alternate;
-         }
-         
-         @keyframes slowZoom {
-             0% { transform: scale(1); }
-             100% { transform: scale(1.1); }
-         }
-         
-         .hero::after {
-             content: '';
-             position: absolute;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             background: linear-gradient(135deg, 
-                 rgba(15, 23, 42, 0.8) 0%, 
-                 rgba(30, 41, 59, 0.7) 50%, 
-                 rgba(220, 38, 38, 0.6) 100%);
+             background: rgba(0, 0, 0, 0.2);
              z-index: 1;
          }
         
                  .hero-content {
              position: relative;
              z-index: 2;
-             max-width: 1000px;
-             padding: 0 var(--space-6);
-             animation: fadeInUp 1s ease-out;
+             max-width: 800px;
+             padding: var(--space-4) var(--space-6);
+             text-align: center;
+             margin-top: var(--space-4);
+         }
+         
+
+         
+         .hero-title {
+             font-size: clamp(2.5rem, 7vw, 4.5rem);
+             margin-bottom: var(--space-6);
+             font-weight: 900;
+             letter-spacing: -0.02em;
+             line-height: 1.2;
+             color: var(--secondary);
+             text-align: center;
+             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+             padding: var(--space-4) 0;
+         }
+         
+         .hero-title .highlight {
+             color: var(--secondary);
+             text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+         }
+         
+         .hero-subtitle {
+             font-size: clamp(1rem, 2.5vw, 1.3rem);
+             margin-bottom: var(--space-8);
+             font-weight: 400;
+             line-height: 1.7;
+             color: var(--secondary);
+             max-width: 700px;
+             margin-left: auto;
+             margin-right: auto;
+             text-align: center;
+             opacity: 0.95;
+             padding: var(--space-2) var(--space-4);
          }
          
          @keyframes fadeInUp {
@@ -561,43 +673,51 @@
                  transform: translateY(30px);
              }
              to {
-                 opacity: 1;
+                 opacity: 0.8;
                  transform: translateY(0);
              }
-         }
-         
-         .hero-title {
-             font-size: clamp(3.5rem, 8vw, 6rem);
-             margin-bottom: var(--space-6);
-             font-weight: 900;
-             letter-spacing: -0.05em;
-             line-height: 1.1;
-             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-             background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-             -webkit-background-clip: text;
-             -webkit-text-fill-color: transparent;
-             background-clip: text;
-         }
-         
-         .hero-subtitle {
-             font-size: clamp(1.2rem, 4vw, 1.6rem);
-             margin-bottom: var(--space-8);
-             opacity: 0.95;
-             font-weight: 500;
-             line-height: 1.6;
-             color: var(--gray-100);
-             max-width: 700px;
-             margin-left: auto;
-             margin-right: auto;
-             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
          }
         
                  .hero-buttons {
              display: flex;
-             gap: var(--space-6);
+             gap: var(--space-4);
              justify-content: center;
              flex-wrap: wrap;
-             animation: fadeInUp 1s ease-out 0.3s both;
+         }
+         
+         .hero-btn {
+             padding: var(--space-4) var(--space-8);
+             border-radius: var(--radius-lg);
+             font-weight: 700;
+             font-size: 1.1rem;
+             letter-spacing: 0.5px;
+             text-transform: uppercase;
+             transition: all 0.3s ease;
+             border: none;
+             cursor: pointer;
+         }
+         
+         .hero-btn-primary {
+             background: var(--secondary);
+             color: var(--primary);
+             box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
+         }
+         
+         .hero-btn-primary:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 8px 24px rgba(255, 255, 255, 0.4);
+         }
+         
+         .hero-btn-secondary {
+             background: transparent;
+             color: var(--secondary);
+             border: 2px solid var(--secondary);
+         }
+         
+         .hero-btn-secondary:hover {
+             background: var(--secondary);
+             color: var(--primary);
+             transform: translateY(-2px);
          }
          
          .btn {
@@ -634,25 +754,26 @@
          }
          
          .btn-primary {
-             background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
-             color: var(--text-light);
-             box-shadow: var(--shadow-xl);
+             background: var(--primary);
+             color: var(--secondary);
+             box-shadow: 0 4px 16px rgba(228, 0, 43, 0.3);
              border: 2px solid transparent;
          }
          
          .btn-primary:hover {
-             background: linear-gradient(135deg, var(--secondary-dark), var(--secondary));
+             background: var(--primary-dark);
+             color: var(--secondary);
              transform: translateY(-3px);
-             box-shadow: var(--shadow-2xl);
-             border-color: var(--text-light);
+             box-shadow: 0 8px 24px rgba(228, 0, 43, 0.4);
+             border-color: var(--primary-dark);
          }
          
          .btn-secondary {
              background: transparent;
              color: var(--text-light);
              border: 3px solid var(--text-light);
-             backdrop-filter: blur(10px);
              -webkit-backdrop-filter: blur(10px);
+             backdrop-filter: blur(10px);
          }
          
          .btn-secondary:hover {
@@ -675,6 +796,53 @@
         
         #about {
             background: var(--bg-accent);
+            padding: var(--space-24) 0;
+        }
+        
+        .about-intro {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-8);
+            text-align: center;
+        }
+        
+        .about-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-8);
+            margin-top: var(--space-12);
+        }
+        
+        .about-feature {
+            background: var(--bg-primary);
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+        
+        .about-feature:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .about-feature h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+        
+        .about-feature h3 .icon {
+            font-size: 1.4rem;
+        }
+        
+        .about-feature p {
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
         
         .section-header {
@@ -683,6 +851,35 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
+        }
+        
+                .section-header::before {
+             content: '';
+             position: absolute;
+             top: -20px;
+             left: 50%;
+             width: 60px;
+             height: 4px;
+             background: var(--primary);
+             transform: translateX(-50%);
+             border-radius: 2px;
+         }
+        
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: var(--space-4);
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            line-height: 1.6;
         }
         
         .section-title {
@@ -707,8 +904,8 @@
              position: relative;
              z-index: 100;
              box-shadow: var(--shadow-lg);
-             backdrop-filter: blur(10px);
              -webkit-backdrop-filter: blur(10px);
+             backdrop-filter: blur(10px);
              margin-bottom: var(--space-8);
          }
          
@@ -779,50 +976,113 @@
         
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: var(--space-6);
-            margin-top: var(--space-8);
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-8);
+            margin-top: var(--space-12);
+            perspective: 1000px;
         }
         
-                 .product-card {
-             background: var(--bg-card);
+        @media (min-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .products-grid > div {
+             background: rgba(255, 255, 255, 0.95);
              border-radius: var(--radius-2xl);
              overflow: hidden;
-             border: 2px solid var(--gray-200);
-             box-shadow: var(--shadow-card);
-             transition: all 0.4s ease;
+             border: 1px solid rgba(0, 0, 0, 0.08);
+             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
              position: relative;
-             cursor: pointer;
+             -webkit-backdrop-filter: blur(10px);
+             backdrop-filter: blur(10px);
+             transform-style: preserve-3d;
          }
          
-         .product-card:hover {
-             transform: translateY(-8px) scale(1.02);
-             box-shadow: var(--shadow-2xl);
-             border-color: var(--secondary);
-         }
-         
-         .product-card::before {
+         .products-grid > div::before {
              content: '';
              position: absolute;
              top: 0;
              left: 0;
              width: 100%;
              height: 100%;
-             background: linear-gradient(135deg, var(--secondary), var(--primary));
+             background: linear-gradient(135deg, rgba(0, 91, 211, 0.05) 0%, rgba(255, 255, 255, 0.1) 100%);
              opacity: 0;
              transition: opacity 0.3s ease;
              z-index: 1;
          }
          
-         .product-card:hover::before {
-             opacity: 0.1;
+         .products-grid > div:hover {
+             box-shadow: 
+                 0 20px 40px rgba(0, 0, 0, 0.1),
+                 0 8px 16px rgba(0, 0, 0, 0.08);
+             transform: translateY(-8px) rotateX(2deg);
+             border-color: rgba(0, 91, 211, 0.2);
+         }
+         
+         .products-grid > div:hover::before {
+             opacity: 1;
+         }
+         
+         .products-grid > div:nth-child(odd) {
+             animation: slideInLeft 0.6s ease-out;
+         }
+         
+         .products-grid > div:nth-child(even) {
+             animation: slideInRight 0.6s ease-out;
+         }
+         
+         @keyframes slideInLeft {
+             from {
+                 opacity: 0;
+                 transform: translateX(-50px);
+             }
+             to {
+                 opacity: 1;
+                 transform: translateX(0);
+             }
+         }
+         
+         @keyframes slideInRight {
+             from {
+                 opacity: 0;
+                 transform: translateX(50px);
+             }
+             to {
+                 opacity: 1;
+                 transform: translateX(0);
+             }
          }
         
         .product-image-container {
             position: relative;
-            height: 200px;
+            height: 240px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             overflow: hidden;
-            background: var(--gray-100);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+        
+        .product-image-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .products-grid > div:hover .product-image-container::after {
+            transform: translateX(100%);
         }
         
         .product-image {
@@ -830,12 +1090,17 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            transition: transform 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
         }
         
-        .product-card:hover .product-image {
-            transform: scale(1.05);
+        .products-grid > div:hover .product-image {
+            transform: scale(1.08);
+            filter: brightness(1.1) saturate(1.2);
         }
+        
+
         
                  .fallback-image {
              width: 100%;
@@ -863,15 +1128,21 @@
         
         .product-content {
             padding: var(--space-6);
+            position: relative;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
         }
         
         .product-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
             margin-bottom: var(--space-2);
             color: var(--text-primary);
             font-weight: 600;
             line-height: 1.3;
+            letter-spacing: -0.01em;
         }
         
         .product-description {
@@ -885,8 +1156,10 @@
         .product-price {
             font-weight: 700;
             color: var(--primary);
-            font-size: 1.25rem;
-            margin-bottom: var(--space-4);
+            font-size: 1.1rem;
+            margin-bottom: var(--space-5);
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.01em;
         }
         
         .product-actions {
@@ -896,43 +1169,45 @@
         
                  .btn-add-to-cart {
              flex: 1;
-             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-             color: var(--text-light);
+             background: var(--primary);
+             color: var(--secondary);
              border: none;
-             padding: var(--space-4) var(--space-6);
+             padding: var(--space-3) var(--space-6);
              border-radius: var(--radius-lg);
              font-weight: 700;
              cursor: pointer;
              transition: all 0.3s ease;
-             font-size: 0.95rem;
+             font-size: 0.9rem;
              letter-spacing: 0.5px;
-             box-shadow: var(--shadow-md);
+             text-transform: uppercase;
+             box-shadow: 0 4px 12px rgba(228, 0, 43, 0.3);
          }
          
          .btn-add-to-cart:hover {
-             background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+             background: var(--primary-dark);
              transform: translateY(-2px);
-             box-shadow: var(--shadow-lg);
+             box-shadow: 0 6px 16px rgba(228, 0, 43, 0.4);
          }
          
          .btn-quick-view {
              background: transparent;
              color: var(--primary);
              border: 2px solid var(--primary);
-             padding: var(--space-4) var(--space-6);
+             padding: var(--space-3) var(--space-6);
              border-radius: var(--radius-lg);
              font-weight: 700;
              cursor: pointer;
              transition: all 0.3s ease;
-             font-size: 0.95rem;
+             font-size: 0.9rem;
              letter-spacing: 0.5px;
+             text-transform: uppercase;
          }
          
          .btn-quick-view:hover {
              background: var(--primary);
-             color: var(--text-light);
+             color: var(--secondary);
              transform: translateY(-2px);
-             box-shadow: var(--shadow-md);
+             box-shadow: 0 4px 12px rgba(228, 0, 43, 0.3);
          }
          
          /* Shopping Cart Sidebar */
@@ -1096,7 +1371,7 @@
              color: var(--text-secondary);
          }
          
-         .empty-cart i {
+         .empty-cart .icon {
              font-size: 4rem;
              color: var(--gray-300);
              margin-bottom: var(--space-4);
@@ -1399,22 +1674,28 @@
              right: 30px;
              width: 60px;
              height: 60px;
-             background: var(--secondary);
-             color: var(--text-light);
+             background: #e53e3e !important;
+             color: #ffffff !important;
              border-radius: var(--radius-full);
              display: flex;
              align-items: center;
              justify-content: center;
              cursor: pointer;
-             box-shadow: var(--shadow-xl);
+             box-shadow: 0 10px 25px rgba(229, 62, 62, 0.4);
              z-index: 1000;
              transition: all 0.3s ease;
              font-size: 1.5rem;
+             border: none;
          }
          
          .floating-cart-btn:hover {
              transform: scale(1.1);
              box-shadow: var(--shadow-2xl);
+         }
+         
+         .floating-cart-btn .icon {
+             color: #ffffff !important;
+             font-size: 1.5rem;
          }
          
          .floating-cart-count {
@@ -1424,13 +1705,17 @@
              background: var(--primary);
              color: var(--text-light);
              border-radius: var(--radius-full);
-             width: 24px;
+             min-width: 24px;
              height: 24px;
              display: flex;
              align-items: center;
              justify-content: center;
              font-size: 0.75rem;
              font-weight: 600;
+             border: 2px solid var(--text-light);
+             box-shadow: var(--shadow-lg);
+             z-index: 10;
+             padding: 0 4px;
          }
          
          /* No Items Found */
@@ -1441,7 +1726,7 @@
              color: var(--text-secondary);
          }
          
-         .no-items-found i {
+         .no-items-found .icon {
              font-size: 4rem;
              color: var(--gray-300);
              margin-bottom: var(--space-4);
@@ -1500,15 +1785,62 @@
         }
         
         .about-image {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             height: 400px;
             border-radius: var(--radius-3xl);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
-            font-size: 4rem;
+            overflow: hidden;
+            position: relative;
             box-shadow: var(--shadow-2xl);
+            transition: all 0.3s ease;
+        }
+        
+        .video-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .video-container:hover {
+            transform: scale(1.02);
+        }
+        
+        .video-thumbnail img,
+        .about-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        .about-video {
+            background: #000;
+            border: none;
+            outline: none;
+        }
+        
+        .video-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: var(--space-6) var(--space-4) var(--space-4);
+            color: white;
+            text-align: center;
+            z-index: 3;
+        }
+        
+        .video-caption h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: var(--space-2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .video-caption p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
         }
         
         /* E-commerce Footer */
@@ -1541,13 +1873,106 @@
             line-height: 1.6;
         }
         
+        .footer-highlights {
+            margin-top: var(--space-6);
+        }
+        
+        .footer-highlight {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-3);
+            color: var(--gray-300);
+        }
+        
+        .footer-highlight .icon {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            margin-bottom: var(--space-4);
+        }
+        
+        .contact-item .icon {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: var(--space-1);
+        }
+        
+        .contact-item strong {
+            color: var(--text-light);
+        }
+        
+        .services-list {
+            margin-bottom: var(--space-6);
+        }
+        
+        .service-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            margin-bottom: var(--space-5);
+        }
+        
+        .service-item .icon {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-top: var(--space-1);
+        }
+        
+        .service-item strong {
+            color: var(--text-light);
+            display: block;
+            margin-bottom: var(--space-1);
+        }
+        
+        .service-item p {
+            color: var(--gray-300);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .service-item strong:contains("Coming Soon") {
+            position: relative;
+        }
+        
+        .service-item strong:contains("Coming Soon")::after {
+            content: "NEW";
+            position: absolute;
+            top: -8px;
+            right: -30px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+        
+        .footer-cta {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+        }
+        
         .copyright {
             text-align: center;
             padding-top: var(--space-8);
             border-top: 1px solid var(--gray-700);
-            font-size: 0.9rem;
+        }
+        
+        .copyright p {
+            margin-bottom: var(--space-2);
             color: var(--gray-400);
         }
+        
+
         
         .contact-info {
             margin-top: var(--space-6);
@@ -1561,7 +1986,7 @@
             color: var(--gray-300);
         }
         
-        .contact-info i {
+        .contact-info .icon {
             width: 18px;
             color: var(--secondary);
         }
@@ -1600,166 +2025,7 @@
             }
         }
         
-                 @media (max-width: 768px) {
-             header {
-                 padding: 0;
-             }
-             
-             .header-main {
-                 padding: var(--space-4) 0;
-             }
-             
-             .header-top p {
-                 flex-direction: column;
-                 gap: var(--space-2);
-             }
-             
-             .header-feature {
-                 font-size: 0.8rem;
-                 padding: var(--space-2) var(--space-4);
-             }
-             
-             nav {
-                 position: relative;
-                 flex-wrap: wrap;
-                 gap: var(--space-4);
-             }
-             
-             .search-container {
-                 order: 3;
-                 max-width: 100%;
-                 margin: var(--space-4) 0 0 0;
-             }
-             
-             .mobile-menu-toggle {
-                 display: block;
-             }
-             
-             .nav-items {
-                 position: absolute;
-                 top: 100%;
-                 left: 0;
-                 right: 0;
-                 background: var(--bg-primary);
-                 border-radius: var(--radius-xl);
-                 border: 1px solid var(--gray-200);
-                 box-shadow: var(--shadow-xl);
-                 flex-direction: column;
-                 gap: var(--space-2);
-                 padding: var(--space-6);
-                 margin-top: var(--space-4);
-                 transform: translateY(-20px);
-                 opacity: 0;
-                 visibility: hidden;
-             }
-             
-             .nav-items.mobile-open {
-                 transform: translateY(0);
-                 opacity: 1;
-                 visibility: visible;
-             }
-             
-             .cart-sidebar {
-                 width: 100%;
-                 right: -100%;
-             }
-             
-             .quick-view-grid {
-                 grid-template-columns: 1fr;
-                 gap: var(--space-6);
-                 padding: var(--space-6);
-             }
-             
-             .quick-view-image {
-                 height: 200px;
-             }
-             
-             .checkout-content {
-                 max-width: 95%;
-                 margin: var(--space-4);
-             }
-             
-             .checkout-form {
-                 padding: var(--space-6);
-             }
-             
-             .checkout-actions {
-                 flex-direction: column;
-             }
-             
-             .checkout-actions .btn {
-                 min-width: 100%;
-             }
-             
-             .floating-cart-btn {
-                 bottom: 20px;
-                 right: 20px;
-                 width: 50px;
-                 height: 50px;
-                 font-size: 1.2rem;
-             }
-             
-             .floating-cart-count {
-                 width: 20px;
-                 height: 20px;
-                 font-size: 0.7rem;
-             }
-             
-             .hero {
-                 min-height: 70vh;
-                 padding-top: 140px;
-             }
-             
-             .category-nav {
-                 padding: var(--space-4) 0;
-             }
-             
-             .category-tabs {
-                 flex-direction: column;
-                 max-width: 100%;
-                 padding: var(--space-4);
-             }
-             
-             .products-grid {
-                 grid-template-columns: 1fr;
-                 gap: var(--space-4);
-             }
-             
-             section {
-                 padding: var(--space-20) 0;
-             }
-             
-             .footer-content {
-                 gap: var(--space-12);
-             }
-         }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 var(--space-4);
-            }
-            
-            .hero {
-                min-height: 60vh;
-            }
-            
-            .product-content {
-                padding: var(--space-4);
-            }
-            
-            .section {
-                padding: var(--space-16) 0;
-            }
-            
-            .btn {
-                padding: var(--space-3) var(--space-6);
-                font-size: 0.9rem;
-            }
-            
-            .products-container {
-                padding: 0 var(--space-4);
-            }
-        }
+        /* Mobile styles are now in responsive-design.css */
     </style>
 </head>
 <body>
@@ -1767,90 +2033,83 @@
 
     <script type="text/babel">
         // Error handling
-        window.addEventListener('error', function(e) {
-            console.error('JavaScript error:', e.error);
-            alert('JavaScript error: ' + e.error.message);
-        });
-        
-        // Test if basic JavaScript is working
-        console.log('Basic JavaScript is working');
-        alert('Page loaded! Testing basic functionality...');
+
         
         const { useState } = React;
 
         // Menu Data with High-Quality Pexels Images
         const menuData = {
             starters: [
-                { name: "Oven Baked Wings (6 PCS)", description: "With dip", price: "Rs.400", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Oven Baked Wings (12 PCS)", description: "", price: "Rs.800", image: "https://images.pexels.com/photos/27645103/pexels-photo-27645103.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Flaming Wings (6 PCS)", description: "With dip", price: "Rs.450", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Flaming Wings (12 PCS)", description: "", price: "Rs.900", image: "https://images.pexels.com/photos/27645103/pexels-photo-27645103.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Mexican Chicken Sandwich", description: "Lack pepper chicken with fresh tomatoes", price: "Rs.650", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Pizza Stacker", description: "", price: "Rs.950", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Euro Sandwich", description: "Chicken tikka with special sauce cheese, lettuce, and pineapples in soft and crispy buns, served with fries", price: "Rs.650", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Wings (5 PCS)", description: "", price: "Rs.320", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Pizza Fries", description: "", price: "Rs.700", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Starter Platter", description: "4 pcs behari rolls, 6 pcs wings with fries and dip sauce", price: "Rs.1000", image: "https://images.pexels.com/photos/27645103/pexels-photo-27645103.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Roll Platter", description: "4 pcs arabic rolls with fries and dip sauce", price: "Rs.1000", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Chicken Nuggets", description: "4 pcs / Rs.250, 6 pcs / Rs.370", price: "Rs.250-370", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Zinger Burger", description: "", price: "Rs.430", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Arabic Roll", description: "", price: "Rs.480", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Behari Roll", description: "", price: "Rs.480", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Mighty Zinger", description: "", price: "Rs.700", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Patty Burger", description: "", price: "Rs.320", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Oven Baked Wings (6 PCS)", description: "Tender chicken wings baked to perfection, served with special dip", price: "Rs.400", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Oven Baked Wings (12 PCS)", description: "Double portion of our signature oven-baked wings for sharing", price: "Rs.800", image: "https://images.pexels.com/photos/27645103/pexels-photo-27645103.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Flaming Wings (6 PCS)", description: "Spicy hot wings with fiery seasoning, served with cooling dip", price: "Rs.450", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Flaming Wings (12 PCS)", description: "Extra spicy wings for those who love the heat - 12 pieces of fire!", price: "Rs.900", image: "https://images.pexels.com/photos/27645103/pexels-photo-27645103.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Mexican Chicken Sandwich", description: "Spiced chicken with fresh tomatoes, lettuce and Mexican sauce", price: "Rs.650", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Pizza Stacker", description: "Layered pizza-style sandwich with cheese, sauce and toppings", price: "Rs.950", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Euro Sandwich", description: "Chicken tikka with special sauce, cheese, lettuce and pineapples in soft buns, served with fries", price: "Rs.650", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Wings (5 PCS)", description: "Classic chicken wings seasoned and cooked to golden perfection", price: "Rs.320", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Pizza Fries", description: "Crispy fries topped with pizza sauce, cheese and Italian herbs", price: "Rs.700", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Starter Platter", description: "Perfect sharing platter: 4 behari rolls, 6 wings with fries and dip sauce", price: "Rs.1000", image: "https://images.pexels.com/photos/27645103/pexels-photo-27645103.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Roll Platter", description: "Family platter with 4 arabic rolls, crispy fries and signature dip sauce", price: "Rs.1000", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Chicken Nuggets", description: "Crispy golden nuggets made from tender chicken breast pieces", price: "Rs.250-370", image: "https://images.pexels.com/photos/30700607/pexels-photo-30700607.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Zinger Burger", description: "Spicy fried chicken fillet with fresh lettuce and mayo in sesame bun", price: "Rs.430", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Arabic Roll", description: "Tender chicken wrapped in soft bread with garlic sauce and vegetables", price: "Rs.480", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Behari Roll", description: "Marinated chicken with traditional behari spices rolled in fresh bread", price: "Rs.480", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Mighty Zinger", description: "Extra large zinger burger with double chicken, cheese and special sauce", price: "Rs.700", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Patty Burger", description: "Classic beef patty burger with lettuce, tomato and special sauce", price: "Rs.320", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
                 { name: "Cheese Sticks", description: "Freshly baked bread filled with yummy cheese blend, served with sauce", price: "Rs.480", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
                 { name: "Crunchy Pasta", description: "Yummy macaroni pasta in white sauce topped with crispy chicken and cheese", price: "Rs.850", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Fettuccine Alfredo Pasta", description: "White sauce with mushrooms and chicken chunks", price: "Small Rs.500 / Large Rs.850", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Calzone Chunks", description: "", price: "Rs.950", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Fries", description: "", price: "Small Rs.250 / Large Rs.350", image: "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Fettuccine Alfredo Pasta", description: "Creamy white sauce pasta with mushrooms and tender chicken chunks", price: "Small Rs.500 / Large Rs.850", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Calzone Chunks", description: "Bite-sized calzone pieces filled with cheese, sauce and your choice of toppings", price: "Rs.950", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Fries", description: "Golden crispy potato fries seasoned with our special blend of spices", price: "Small Rs.250 / Large Rs.350", image: "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
             ],
             pizza: [
-                { name: "Roger Legend Flavours", description: "", price: "Small Rs.500 / Medium Rs.1000 / Large Rs.1400 / Family Rs.2000", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Signature Pizza Crown Crust", description: "", price: "Rs.1600-2200", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Roger Special Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Creamy Tikka", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Chicken Tikka Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Chicken Fajita Pizza", description: "Peppers with special herbs and spice", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Chicken Supreme", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Very Veggie", description: "Black olive, mozzarella cheese, jalapeno and lots of cheese", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Classic Pepperoni", description: "Meaty feast of pepperoni, mozzarella cheese and tomato sauce", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Calzone", description: "Sauce and lots of cheese", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Lebonani", description: "Chicken tikka, mozzarella cheese", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Tika Supreme", description: "Chicken tikka, cheese, special sauce", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Behari Kabab", description: "Mozzarella cheese", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Stuffed Kabab Two Flavour Pizza", description: "Choose your flavour", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Two Flavour Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Hot & Spicy", description: "Fajita chicken, onion, capsicum, jalapeno, tomato", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Euro Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Chicken Sausage", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Cheese Lover", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Extreme Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Mushroom & Olives", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Tandoori Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "BBQ Pizza", description: "", price: "", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Roger Legend Flavours", description: "Our signature pizza with legendary blend of spices and premium toppings", price: "Small Rs.500 / Medium Rs.1000 / Large Rs.1400 / Family Rs.2000", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Signature Pizza Crown Crust", description: "Premium crown crust pizza with signature toppings and extra cheese", price: "Rs.1600-2200", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Roger Special Pizza", description: "Chef's special combination of chicken, vegetables and secret sauce", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Creamy Tikka", description: "Tender chicken tikka pieces with creamy white sauce and mozzarella", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Chicken Tikka Pizza", description: "Marinated chicken tikka with onions, bell peppers and cheese", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Chicken Fajita Pizza", description: "Spiced chicken with peppers, onions, special herbs and melted cheese", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Chicken Supreme", description: "Ultimate chicken pizza with multiple chicken varieties and premium toppings", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Very Veggie", description: "Garden fresh vegetables with black olives, jalapeños and extra mozzarella", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Classic Pepperoni", description: "Traditional pepperoni slices with rich tomato sauce and mozzarella cheese", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Calzone", description: "Folded pizza filled with cheese, sauce and your choice of toppings", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Lebonani", description: "Middle Eastern style pizza with chicken tikka and authentic spices", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Tika Supreme", description: "Premium chicken tikka with special sauce and extra cheese topping", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Behari Kabab", description: "Traditional behari kabab pieces with mozzarella and aromatic spices", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Stuffed Kabab Two Flavour Pizza", description: "Half and half pizza with stuffed kabab and your choice of second flavor", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Two Flavour Pizza", description: "Best of both worlds - choose any two flavors on one pizza", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Hot & Spicy", description: "Fiery combination of spiced chicken, jalapeños, onions and hot peppers", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Euro Pizza", description: "European style pizza with premium ingredients and continental flavors", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Chicken Sausage", description: "Juicy chicken sausage slices with herbs, cheese and tomato base", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Cheese Lover", description: "Ultimate cheese experience with multiple cheese varieties and creamy base", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Extreme Pizza", description: "Loaded with everything - chicken, beef, vegetables and extra cheese", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Mushroom & Olives", description: "Fresh mushrooms and black olives with garlic sauce and mozzarella", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Tandoori Pizza", description: "Authentic tandoori chicken with traditional spices and yogurt base", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "BBQ Pizza", description: "Smoky BBQ chicken with tangy barbecue sauce and caramelized onions", price: "Available in all sizes", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
             ],
             deals: [
-                { name: "Four X Deal", description: "4 Small Pizza, 1.5L Cold Drink", price: "Rs.2100", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Double Up Deal", description: "2 Large Pizza, 1.5L Cold Drink", price: "Rs.2900", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Family Feast", description: "2 Family Pizza, 1.5L Cold Drink", price: "Rs.3950", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Do It Deal", description: "1 Large Pizza, 1 Starter Platter, 1.5L Cold Drink", price: "Rs.2450", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "2 Zinger Deal", description: "2 Zinger Burger, 1 Liter Drink", price: "Rs.1080", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Kids Deal", description: "Chicken Patty burger, Small Drink", price: "Rs.350", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Four X Deal", description: "Perfect for groups - 4 delicious small pizzas with refreshing cold drink", price: "Rs.2100", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Double Up Deal", description: "Great value combo - 2 large pizzas and cold drink for sharing", price: "Rs.2900", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Family Feast", description: "Ultimate family meal - 2 family-size pizzas with cold drink", price: "Rs.3950", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Do It Deal", description: "Complete meal deal - large pizza, starter platter and cold drink", price: "Rs.2450", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "2 Zinger Deal", description: "Double zinger burger combo with liter drink - perfect for two", price: "Rs.1080", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Kids Deal", description: "Kid-friendly meal with chicken patty burger and small drink", price: "Rs.350", image: "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
             ],
             sauces: [
-                { name: "Mayo Sauce", description: "", price: "Rs.50", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Spicy Sauce", description: "", price: "Rs.50", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "BBQ Sauce", description: "", price: "Rs.50", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Mayo Sauce", description: "Creamy mayonnaise sauce - perfect with any meal", price: "Rs.50", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Spicy Sauce", description: "Hot and tangy sauce for those who love the heat", price: "Rs.50", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "BBQ Sauce", description: "Smoky barbecue sauce with rich, tangy flavor", price: "Rs.50", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
             ],
             addons: [
-                { name: "Cheese Crust", description: "", price: "Small Rs.150 / Medium Rs.200 / Large Rs.250 / Family Rs.350", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Kabab Crust", description: "", price: "Small Rs.250 / Medium Rs.380 / Large Rs.450", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
-                { name: "Extra Topping", description: "", price: "Small Rs.80 / Medium Rs.120 / Large Rs.200 / Family Rs.250", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Cheese Crust", description: "Stuffed crust filled with melted cheese - upgrade your pizza", price: "Small Rs.150 / Medium Rs.200 / Large Rs.250 / Family Rs.350", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Kabab Crust", description: "Premium crust stuffed with flavorful kabab pieces", price: "Small Rs.250 / Medium Rs.380 / Large Rs.450", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
+                { name: "Extra Topping", description: "Add more of your favorite toppings to any pizza", price: "Small Rs.80 / Medium Rs.120 / Large Rs.200 / Family Rs.250", image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" },
             ]
         };
 
         function App() {
-            console.log('App function is running');
+
             const [activeCategory, setActiveCategory] = useState('starters');
             const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
             const [activeNav, setActiveNav] = useState('home');
@@ -1860,6 +2119,7 @@
             const [showQuickView, setShowQuickView] = useState(false);
             const [quickViewItem, setQuickViewItem] = useState(null);
             const [showCheckout, setShowCheckout] = useState(false);
+            const [isAtTop, setIsAtTop] = useState(true);
             const [customerInfo, setCustomerInfo] = useState({
                 name: '',
                 phone: '',
@@ -1892,6 +2152,9 @@
                 const handleScroll = () => {
                     const sections = ['home', 'menu', 'about', 'contact'];
                     const scrollPosition = window.scrollY + 200; // Better offset for header height
+                    
+                    // Check if we're at the top of the page
+                    setIsAtTop(window.scrollY < 100);
                     
                     // Find the current section based on scroll position
                     let currentSection = 'home';
@@ -1933,12 +2196,19 @@
             }, [activeNav]);
 
             const toggleMobileMenu = () => {
-                setMobileMenuOpen(!mobileMenuOpen);
+                const newState = !mobileMenuOpen;
+                setMobileMenuOpen(newState);
+                
+                // Add/remove body class for proper mobile menu behavior
+                if (newState) {
+                    document.body.classList.add('mobile-menu-open');
+                } else {
+                    document.body.classList.remove('mobile-menu-open');
+                }
             };
 
             const addToCart = (item) => {
-                console.log('addToCart function called with:', item);
-                alert('Adding to cart: ' + item.name);
+
                 const existingItem = cartItems.find(cartItem => cartItem.name === item.name);
                 if (existingItem) {
                     setCartItems(cartItems.map(cartItem => 
@@ -1970,11 +2240,42 @@
                 }
             };
 
+            // Helper function to parse price from string
+            const parsePrice = (priceString) => {
+                if (!priceString) return 0;
+                
+                let priceStr = priceString.toString();
+                
+                // Handle formats like "Small Rs.500 / Large Rs.850" - take the first price
+                if (priceStr.includes('/')) {
+                    priceStr = priceStr.split('/')[0].trim();
+                }
+                
+                // Handle formats like "Rs.250-370" - take the first price
+                if (priceStr.includes('-') && priceStr.match(/Rs\.\d+-\d+/)) {
+                    priceStr = priceStr.split('-')[0].trim();
+                }
+                
+                // Extract all numbers from the string and take the first one
+                const matches = priceStr.match(/\d+(\.\d+)?/g);
+                if (matches && matches.length > 0) {
+                    return parseFloat(matches[0]);
+                }
+                
+                return 0;
+            };
+
             const getCartTotal = () => {
-                return cartItems.reduce((total, item) => {
-                    const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+                const total = cartItems.reduce((total, item) => {
+                    const price = parsePrice(item.price);
                     return total + (price * item.quantity);
                 }, 0);
+                
+                // Debug log to see what's happening
+                console.log('Cart items:', cartItems);
+                console.log('Calculated total:', total);
+                
+                return total;
             };
 
             const getCartItemCount = () => {
@@ -1982,8 +2283,7 @@
             };
 
             const openQuickView = (item) => {
-                console.log('openQuickView function called with:', item);
-                alert('Opening quick view for: ' + item.name);
+
                 setQuickViewItem(item);
                 setShowQuickView(true);
             };
@@ -2030,28 +2330,28 @@
                 
                 const total = getCartTotal();
                 
-                return `🍕 *NEW ORDER FROM ROGER'S WEBSITE* 🍕
+                return `*NEW ORDER FROM ROGER'S WEBSITE*
 
-👤 *Customer Details:*
+*Customer Details:*
 Name: ${customerInfo.name}
 Phone: ${customerInfo.phone}
 Address: ${customerInfo.address}
 ${customerInfo.deliveryInstructions ? `Delivery Instructions: ${customerInfo.deliveryInstructions}` : ''}
 
-🛒 *Order Items:*
+*Order Items:*
 ${itemsList}
 
-💰 *Total Amount: Rs.${total.toFixed(0)}*
+*Total Amount: Rs.${total.toFixed(0)}*
 
-📱 *Order placed via website*
-⏰ *Time: ${new Date().toLocaleString('en-PK')}*
+*Order placed via website*
+*Time: ${new Date().toLocaleString('en-PK')}*
 
-Please confirm this order and provide delivery time. Thank you! 🚚✨`;
+Please confirm this order and provide delivery time. Thank you!`;
             };
 
             const showNotification = (message, type = 'success') => {
                 // Simple notification for now
-                alert(message);
+                // Notification functionality can be implemented here
             };
 
             return (
@@ -2060,21 +2360,21 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                                                  <div className="header-top">
                              <div className="container">
                                  <p>
-                                     <span className="header-feature">🚚 Free Home Delivery</span>
+                                     <span className="header-feature">{React.createElement(Icons.Truck)} Free Home Delivery</span>
                                      <span className="header-separator">•</span>
-                                     <span className="header-feature">📞 Call: 0332-1771772</span>
+                                     <span className="header-feature">{React.createElement(Icons.Phone)} Call: 0332-1771772</span>
                                      <span className="header-separator">•</span>
-                                     <span className="header-feature">⏰ Open Daily: 11:00 AM - 11:00 PM</span>
+                                     <span className="header-feature">{React.createElement(Icons.UtensilsCrossed)} Dine-In Coming Soon!</span>
                                  </p>
                              </div>
                          </div>
                         <div className="header-main">
                             <div className="container">
                                 <nav>
-                                                                         <div className="logo" onClick={() => alert('Logo clicked! React is working!')}>
+                                                                         <div className="logo">
                                          <div className="logo-icon">
                                              <img 
-                                                 src="images/ovenwings.jpg" 
+                                                 src="images/logo.jpg" 
                                                  alt="Roger's Restaurant Logo" 
                                                  className="logo-image"
                                                  onError={(e) => {
@@ -2083,20 +2383,22 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                                                  }}
                                              />
                                              <div className="fallback-logo" style={{display: 'none'}}>
-                                                 <i className="fas fa-utensils"></i>
+                                                 {React.createElement(Icons.UtensilsCrossed)}
                                              </div>
                                          </div>
                                          <div className="logo-text">
-                                             <span className="logo-main">ROGER'S</span>
-                                             <span className="logo-tagline">Restaurant</span>
+                                             <span className="logo-main">ROGER</span>
+                                             <span className="logo-tagline">FAST FOOD</span>
                                          </div>
                                      </div>
                                     
                                     <div className="search-container">
                                          <div className="search-box">
-                                             <i className="fas fa-search search-icon"></i>
+                                             <span className="search-icon">{React.createElement(Icons.Search)}</span>
                                              <input
                                                  type="text"
+                                                 id="search-input"
+                                                 name="search-query"
                                                  placeholder="Search menu items..."
                                                  value={searchQuery}
                                                  onChange={(e) => setSearchQuery(e.target.value)}
@@ -2131,8 +2433,10 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                                             aria-label="Go to Contact"
                                         >Contact</li>
                                                                                  <li className="cart-icon" onClick={() => setCartOpen(!cartOpen)}>
-                                             <i className="fas fa-shopping-cart"></i>
-                                             <span className="cart-badge">{getCartItemCount()}</span>
+                                             {React.createElement(Icons.ShoppingCart)}
+                                             {getCartItemCount() > 0 && (
+                                                 <span className="cart-badge">{getCartItemCount()}</span>
+                                             )}
                                          </li>
                                     </ul>
                                     <button 
@@ -2140,7 +2444,7 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                                         onClick={toggleMobileMenu}
                                         aria-label="Toggle mobile menu"
                                     >
-                                        <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+                                        {mobileMenuOpen ? React.createElement(Icons.X) : React.createElement(Icons.Menu)}
                                     </button>
                                 </nav>
                             </div>
@@ -2150,18 +2454,18 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                      {/* Shopping Cart Sidebar */}
                      <div className={`cart-sidebar ${cartOpen ? 'open' : ''}`}>
                          <div className="cart-header">
-                             <h3>Shopping Cart</h3>
+                             <h3>Food Cart</h3>
                              <button className="close-cart" onClick={() => setCartOpen(false)}>
-                                 <i className="fas fa-times"></i>
+                                 {React.createElement(Icons.X)}
                              </button>
                          </div>
                          
                          {cartItems.length === 0 ? (
                              <div className="empty-cart">
-                                 <i className="fas fa-shopping-cart"></i>
+                                 {React.createElement(Icons.ShoppingCart)}
                                  <p>Your cart is empty</p>
                                  <button className="btn btn-primary" onClick={() => setCartOpen(false)}>
-                                     Start Shopping
+                                     Start Ordering
                                  </button>
                              </div>
                          ) : (
@@ -2177,16 +2481,16 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                                                  <p className="cart-item-price">{item.price}</p>
                                                  <div className="quantity-controls">
                                                      <button onClick={() => updateQuantity(item.name, item.quantity - 1)}>
-                                                         <i className="fas fa-minus"></i>
+                                                         {React.createElement(Icons.Minus)}
                                                      </button>
                                                      <span>{item.quantity}</span>
                                                      <button onClick={() => updateQuantity(item.name, item.quantity + 1)}>
-                                                         <i className="fas fa-plus"></i>
+                                                         {React.createElement(Icons.Plus)}
                                                      </button>
                                                  </div>
                                              </div>
                                              <button className="remove-item" onClick={() => removeFromCart(item.name)}>
-                                                 <i className="fas fa-trash"></i>
+                                                 {React.createElement(Icons.Trash2)}
                                              </button>
                                          </div>
                                      ))}
@@ -2211,14 +2515,27 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                      {/* Floating Action Button */}
                      {cartItems.length > 0 && !cartOpen && (
                          <div className="floating-cart-btn" onClick={() => setCartOpen(true)}>
-                             <i className="fas fa-shopping-cart"></i>
-                             <span className="floating-cart-count">{getCartItemCount()}</span>
+                             {React.createElement(Icons.ShoppingCart)}
+                             {getCartItemCount() > 0 && (
+                                 <span className="floating-cart-count">{getCartItemCount()}</span>
+                             )}
                          </div>
                      )}
                      
-                     {/* Scroll to Top Button */}
-                     <div className="scroll-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                         <i className="fas fa-arrow-up"></i>
+                     {/* Scroll Button */}
+                     <div 
+                         className="scroll-to-top" 
+                         onClick={() => {
+                             if (isAtTop) {
+                                 // Scroll to menu section
+                                 document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' });
+                             } else {
+                                 // Scroll to top
+                                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                             }
+                         }}
+                     >
+                         {isAtTop ? React.createElement(Icons.ArrowDown) : React.createElement(Icons.ArrowUp)}
                      </div>
                      
                      {/* Quick View Modal */}
@@ -2226,7 +2543,7 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                          <div className="quick-view-modal">
                              <div className="quick-view-content">
                                  <button className="close-quick-view" onClick={closeQuickView}>
-                                     <i className="fas fa-times"></i>
+                                     {React.createElement(Icons.X)}
                                  </button>
                                  <div className="quick-view-grid">
                                      <div className="quick-view-image">
@@ -2261,7 +2578,7 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                          <div className="checkout-modal">
                              <div className="checkout-content">
                                  <button className="close-checkout" onClick={() => setShowCheckout(false)}>
-                                     <i className="fas fa-times"></i>
+                                     {React.createElement(Icons.X)}
                                  </button>
                                  
                                  <div className="checkout-header">
@@ -2298,6 +2615,7 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                                          <label htmlFor="customer-address">Delivery Address *</label>
                                          <textarea
                                              id="customer-address"
+                                             name="customer-address"
                                              value={customerInfo.address}
                                              onChange={(e) => setCustomerInfo({...customerInfo, address: e.target.value})}
                                              placeholder="Enter your complete delivery address"
@@ -2310,6 +2628,7 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                                          <label htmlFor="delivery-instructions">Delivery Instructions (Optional)</label>
                                          <textarea
                                              id="delivery-instructions"
+                                             name="delivery-instructions"
                                              value={customerInfo.deliveryInstructions}
                                              onChange={(e) => setCustomerInfo({...customerInfo, deliveryInstructions: e.target.value})}
                                              placeholder="Any special delivery instructions..."
@@ -2337,7 +2656,7 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                                              Cancel
                                          </button>
                                          <button className="btn btn-primary" onClick={handleCheckout}>
-                                             <i className="fab fa-whatsapp"></i>
+                                             {React.createElement(Icons.MessageCircle)}
                                              Send Order to WhatsApp
                                          </button>
                                      </div>
@@ -2348,11 +2667,20 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                      
                      <div id="home" className="hero">
                         <div className="hero-content">
-                            <h2 className="hero-title">Roger's Legendary Flavors</h2>
-                            <p className="hero-subtitle">Experience the taste of perfection with our delicious fast food offerings</p>
+                            <h2 className="hero-title">
+                                BITE INTO <span className="highlight">ROGER</span><br />
+                            </h2>
+                            <p className="hero-subtitle">
+                                Fresh, never frozen chicken. Hand-breaded and pressure cooked in 100% shortening. 
+                                Currently delivering to your doorstep - Dine-in facility coming soon!
+                            </p>
                             <div className="hero-buttons">
-                                <button className="btn btn-primary" onClick={() => handleNavClick('menu')}>Order Now</button>
-                                <button className="btn btn-secondary" onClick={() => handleNavClick('contact')}>Contact Us</button>
+                                <button className="hero-btn hero-btn-primary" onClick={() => handleNavClick('menu')}>
+                                    ORDER NOW
+                                </button>
+                                <button className="hero-btn hero-btn-secondary" onClick={() => handleNavClick('menu')}>
+                                    VIEW MENU
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -2362,20 +2690,7 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                                                          <div className="section-header">
                                  <h2 className="section-title">Our Menu</h2>
                                  <p className="section-subtitle">Discover our wide range of delicious dishes</p>
-                                 <button 
-                                     className="btn btn-primary" 
-                                     onClick={() => alert('Test button works! Cart items: ' + cartItems.length)}
-                                     style={{marginTop: '20px'}}
-                                 >
-                                     Test Button (Cart: {cartItems.length})
-                                 </button>
-                                 <button 
-                                     className="btn btn-secondary" 
-                                     onClick={() => alert('Simple test button works!')}
-                                     style={{marginTop: '10px', marginLeft: '10px'}}
-                                 >
-                                     Simple Test
-                                 </button>
+
                              </div>
                             
                             <div className="category-nav">
@@ -2422,7 +2737,7 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                                  <div className="products-grid">
                                      {filteredMenu.length === 0 ? (
                                          <div className="no-items-found">
-                                             <i className="fas fa-search"></i>
+                                             {React.createElement(Icons.Search)}
                                              <h3>No items found</h3>
                                              <p>Try adjusting your search terms or browse all categories</p>
                                              <button 
@@ -2433,44 +2748,45 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                                              </button>
                                          </div>
                                      ) : (
-                                         filteredMenu.map((item, index) => (
-                                             <div className="product-card" key={index}>
-                                                 <div className="product-image-container">
-                                                     <img 
-                                                         src={item.image} 
-                                                         alt={item.name}
-                                                         loading="lazy"
-                                                         onError={(e) => {
-                                                             e.target.style.display = 'none';
-                                                             e.target.nextSibling.style.display = 'flex';
-                                                             e.target.nextSibling.innerHTML = `<i className="fas fa-utensils"></i>`;
-                                                         }}
-                                                     />
-                                                     <div className="fallback-image">
-                                                         <i className="fas fa-utensils"></i>
-                                                     </div>
-                                                 </div>
-                                                 <div className="product-content">
-                                                     <h3 className="product-title">{item.name}</h3>
-                                                     <p className="product-description">{item.description}</p>
-                                                     <div className="product-price">{item.price}</div>
-                                                     <div className="product-actions">
-                                                         <button 
-                                                             className="btn btn-add-to-cart"
-                                                             onClick={() => addToCart(item)}
-                                                         >
-                                                             Add to Cart
-                                                         </button>
-                                                         <button 
-                                                             className="btn btn-quick-view"
-                                                             onClick={() => openQuickView(item)}
-                                                         >
-                                                             Quick View
-                                                         </button>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         ))
+                                                                                 filteredMenu.map((item, index) => (
+                                            <div key={index}>
+                                                <div className="product-image-container">
+                                                    <img 
+                                                        src={item.image} 
+                                                        alt={item.name}
+                                                        loading="lazy"
+                                                        onError={(e) => {
+                                                            e.target.style.display = 'none';
+                                                            e.target.nextSibling.style.display = 'flex';
+                                                            const iconElement = React.createElement(Icons.UtensilsCrossed);
+                                                            ReactDOM.render(iconElement, e.target.nextSibling);
+                                                        }}
+                                                    />
+                                                    <div className="fallback-image">
+                                                        {React.createElement(Icons.UtensilsCrossed)}
+                                                    </div>
+                                                </div>
+                                                <div className="product-content">
+                                                    <h3 className="product-title">{item.name}</h3>
+                                                    <p className="product-description">{item.description}</p>
+                                                    <div className="product-price">{item.price}</div>
+                                                    <div className="product-actions">
+                                                        <button 
+                                                            className="btn btn-add-to-cart"
+                                                            onClick={() => addToCart(item)}
+                                                        >
+                                                            Add to Cart
+                                                        </button>
+                                                        <button 
+                                                            className="btn btn-quick-view"
+                                                            onClick={() => openQuickView(item)}
+                                                        >
+                                                            Quick View
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
                                      )}
                                  </div>
                              </div>
@@ -2481,12 +2797,45 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                         <div className="container">
                             <div className="about-content">
                                 <div className="about-text">
-                                    <h2 className="section-title">About Us</h2>
-                                    <p>Roger's Restaurant blends classic recipes with a modern twist. From our legendary pizzas to sizzling wings and gourmet sandwiches, we craft every bite with premium ingredients and a passion for flavor.</p>
+                                    <h2 className="section-title">About Roger Fast Food</h2>
+                                    <p className="about-intro">
+                                        Since our inception, Roger's has been serving the community with exceptional fast food that combines traditional flavors with modern culinary techniques. Currently specializing in home delivery, we're excited to announce that our dine-in facility is coming soon for complete family dining experiences.
+                                    </p>
+                                    
+                                    <div className="about-details">
+                                        <div className="about-feature">
+                                            <h3>{React.createElement(Icons.Pizza)} Our Specialty</h3>
+                                            <p>From hand-tossed pizzas with premium toppings to perfectly seasoned chicken wings, every dish is prepared with the finest ingredients. Our signature sauces and secret spice blends have been perfected over years to deliver that authentic taste you crave.</p>
+                                        </div>
+                                        
+                                        <div className="about-feature">
+                                            <h3>{React.createElement(Icons.Clock)} Fresh & Fast</h3>
+                                            <p>We believe in serving fresh, hot food quickly without compromising on quality. Our efficient kitchen operations ensure your meal is prepared to perfection and delivered promptly for home delivery. Dine-in facility coming soon!</p>
+                                        </div>
+                                        
+                                        <div className="about-feature">
+                                            <h3>{React.createElement(Icons.Heart)} Community Focused</h3>
+                                            <p>Roger's is more than just a food destination - we're part of the community. We source locally when possible, support local events, and strive to create a welcoming atmosphere for families and friends to gather and enjoy great food together.</p>
+                                        </div>
+                                        
+                                        <div className="about-feature">
+                                            <h3>{React.createElement(Icons.Star)} Quality Promise</h3>
+                                            <p>Every ingredient is carefully selected, every recipe is time-tested, and every meal is prepared with care. From our crispy chicken to our perfectly melted cheese, we maintain the highest standards to ensure your satisfaction with every bite.</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                                                 <div className="about-image">
-                                     <i className="fas fa-utensils"></i>
-                                 </div>
+                                <div className="about-image">
+                                    <div className="video-container">
+                                        <video 
+                                            src="images/rogers1.mp4" 
+                                            autoPlay 
+                                            loop 
+                                            muted 
+                                            playsInline
+                                            className="about-video"
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -2495,27 +2844,85 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
                         <div className="container">
                             <div className="footer-content">
                                 <div className="footer-section">
-                                    <h3>Roger's Restaurant</h3>
-                                    <p>Experience the legendary flavors that have made us a favorite fast food destination.</p>
-                                </div>
-                                
-                                <div className="footer-section">
-                                    <h3>Contact Us</h3>
-                                    <div className="contact-info">
-                                        <p><i className="fas fa-map-marker-alt"></i> Ibrahim Market Phase 6 Sector F3 Block 5 Shop 1</p>
-                                        <p><i className="fas fa-phone"></i> 0332-1771772</p>
-                                        <p><i className="fas fa-clock"></i> Open Daily: 11:00 AM - 11:00 PM</p>
+                                    <h3>Roger Fast Food</h3>
+                                    <p>Experience the legendary flavors that have made us a favorite fast food destination. From our signature pizzas to mouth-watering wings, every dish is crafted with passion and served with pride.</p>
+                                    <div className="footer-highlights">
+                                        <div className="footer-highlight">
+                                            {React.createElement(Icons.Award)}
+                                            <span>Premium Quality Ingredients</span>
+                                        </div>
+                                        <div className="footer-highlight">
+                                            {React.createElement(Icons.Zap)}
+                                            <span>Fast & Fresh Delivery</span>
+                                        </div>
+                                        <div className="footer-highlight">
+                                            {React.createElement(Icons.Users)}
+                                            <span>Family-Friendly Environment</span>
+                                        </div>
                                     </div>
                                 </div>
                                 
                                 <div className="footer-section">
-                                    <h3>Free Home Delivery</h3>
-                                    <p>Call us to place your order for free home delivery</p>
-                                    <button className="btn btn-primary" onClick={() => handleNavClick('call')}>Call Now: 0332-1771772</button>
+                                    <h3>Contact Information</h3>
+                                    <div className="contact-info">
+                                        <div className="contact-item">
+                                            {React.createElement(Icons.MapPin)}
+                                            <div>
+                                                <strong>Address:</strong><br/>
+                                                Ibrahim Market Phase 6<br/>
+                                                Sector F3 Block 5 Shop 1
+                                            </div>
+                                        </div>
+                                        <div className="contact-item">
+                                            {React.createElement(Icons.Phone)}
+                                            <div>
+                                                <strong>Phone:</strong><br/>
+                                                0332-1771772
+                                            </div>
+                                        </div>
+                                        <div className="contact-item">
+                                            {React.createElement(Icons.Clock)}
+                                            <div>
+                                                <strong>Hours:</strong><br/>
+                                                Open Daily: 11:00 AM - 11:00 PM
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div className="footer-section">
+                                    <h3>Our Services</h3>
+                                    <div className="services-list">
+                                        <div className="service-item">
+                                            {React.createElement(Icons.Home)}
+                                            <div>
+                                                <strong>Free Home Delivery</strong>
+                                                <p>Enjoy our delicious food in the comfort of your home with free delivery service.</p>
+                                            </div>
+                                        </div>
+                                        <div className="service-item">
+                                            {React.createElement(Icons.UtensilsCrossed)}
+                                            <div>
+                                                <strong>Dine-In Experience - Coming Soon!</strong>
+                                                <p>We're preparing to offer a complete family dining experience at our Cafe. Stay tuned for the grand opening of our dine-in facility!</p>
+                                            </div>
+                                        </div>
+                                        <div className="service-item">
+                                            {React.createElement(Icons.Cake)}
+                                            <div>
+                                                <strong>Special Events</strong>
+                                                <p>Perfect for birthdays, parties, and special occasions. Call us for custom orders.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button className="btn btn-primary footer-cta" onClick={() => handleNavClick('call')}>
+                                        {React.createElement(Icons.Phone)} Order Now: 0332-1771772
+                                    </button>
                                 </div>
                             </div>
                             <div className="copyright">
-                                &copy; {new Date().getFullYear()} Roger's Restaurant. All Rights Reserved.
+                                <p>&copy; {new Date().getFullYear()} Roger's Fast Food. All Rights Reserved.</p>
+                                <p>Serving delicious food with love since our establishment. Your satisfaction is our priority.</p>
                             </div>
                         </div>
                     </footer>
@@ -2523,9 +2930,14 @@ Please confirm this order and provide delivery time. Thank you! 🚚✨`;
             );
         }
 
-        console.log('About to render React app');
         ReactDOM.render(<App />, document.getElementById('root'));
-        console.log('React app rendered');
     </script>
+    
+    <!-- ===== RESPONSIVE SYSTEM SCRIPTS ===== -->
+    <script src="responsive-components.js?v=4.0"></script>
+    <script src="performance-components.js?v=4.0"></script>
+    <script src="performance-utils.js?v=4.0"></script>
+    <script src="performance-integration.js?v=4.0"></script>
+    <script src="sw.js?v=4.0"></script>
 </body>
 </html>

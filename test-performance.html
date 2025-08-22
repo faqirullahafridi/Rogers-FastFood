@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Test - Roger's Restaurant</title>
+    
+    <!-- Performance Optimizations -->
+    <link rel="stylesheet" href="performance-styles.css">
+    <script src="performance-components.js"></script>
+    <script src="performance-utils.js"></script>
+    <script src="performance-integration.js"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        .status.info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Performance Optimization Test</h1>
+    
+    <div class="test-section">
+        <h2>1. Service Worker Test</h2>
+        <button class="test-button" onclick="testServiceWorker()">Test Service Worker</button>
+        <div id="sw-status" class="status info">Click to test service worker registration</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Performance Components Test</h2>
+        <button class="test-button" onclick="testComponents()">Test Components</button>
+        <div id="components-status" class="status info">Click to test performance components</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Performance Utils Test</h2>
+        <button class="test-button" onclick="testUtils()">Test Utils</button>
+        <div id="utils-status" class="status info">Click to test performance utilities</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. Performance Integration Test</h2>
+        <button class="test-button" onclick="testIntegration()">Test Integration</button>
+        <div id="integration-status" class="status info">Click to test full integration</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>5. Performance Dashboard</h2>
+        <div id="performance-dashboard"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>6. Console Commands</h2>
+        <p>Open browser console and run these commands:</p>
+        <code>
+            window.PerformanceTest.testImageLoading()<br>
+            window.PerformanceTest.testScrollPerformance()<br>
+            window.PerformanceTest.testMemoryUsage()
+        </code>
+    </div>
+
+    <script>
+        // Test Service Worker
+        function testServiceWorker() {
+            const statusEl = document.getElementById('sw-status');
+            statusEl.className = 'status info';
+            statusEl.textContent = 'Testing service worker...';
+            
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        statusEl.className = 'status success';
+                        statusEl.textContent = `✅ Service Worker registered successfully! Scope: ${registration.scope}`;
+                    })
+                    .catch(error => {
+                        statusEl.className = 'status error';
+                        statusEl.textContent = `❌ Service Worker registration failed: ${error.message}`;
+                    });
+            } else {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ Service Worker not supported in this browser';
+            }
+        }
+        
+        // Test Components
+        function testComponents() {
+            const statusEl = document.getElementById('components-status');
+            
+            if (window.PerformanceComponents) {
+                const components = Object.keys(window.PerformanceComponents);
+                statusEl.className = 'status success';
+                statusEl.textContent = `✅ Performance Components loaded: ${components.join(', ')}`;
+            } else {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ Performance Components not found';
+            }
+        }
+        
+        // Test Utils
+        function testUtils() {
+            const statusEl = document.getElementById('utils-status');
+            
+            if (window.PerformanceUtils) {
+                const utils = Object.keys(window.PerformanceUtils);
+                statusEl.className = 'status success';
+                statusEl.textContent = `✅ Performance Utils loaded: ${utils.join(', ')}`;
+            } else {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ Performance Utils not found';
+            }
+        }
+        
+        // Test Integration
+        function testIntegration() {
+            const statusEl = document.getElementById('integration-status');
+            
+            if (window.PerformanceIntegration) {
+                const functions = Object.keys(window.PerformanceIntegration);
+                statusEl.className = 'status success';
+                statusEl.textContent = `✅ Performance Integration loaded: ${functions.join(', ')}`;
+            } else {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ Performance Integration not found';
+            }
+        }
+        
+        // Auto-run tests when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                testComponents();
+                testUtils();
+                testIntegration();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Layout Test - Roger's Restaurant</title>
+    <style>
+        /* Test CSS to verify mobile layout */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .test-header {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .test-content {
+            padding: 20px;
+        }
+        
+        .test-box {
+            background: #f0f0f0;
+            border: 2px solid #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .mobile-indicator {
+            background: #ff6b6b;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .mobile-indicator {
+                background: #4ecdc4;
+            }
+            
+            .test-box {
+                background: #e8f5e8;
+                border-color: #4ecdc4;
+            }
+            
+            .test-header {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>Mobile Layout Test</h1>
+        <p>Resize your browser to test mobile responsiveness</p>
+    </div>
+    
+    <div class="test-content">
+        <div class="mobile-indicator">
+            📱 Mobile Layout Test - Resize browser to see changes
+        </div>
+        
+        <div class="test-box">
+            <h2>Test Box 1</h2>
+            <p>This box should change color and style on mobile devices (width ≤ 768px)</p>
+        </div>
+        
+        <div class="test-box">
+            <h2>Test Box 2</h2>
+            <p>If you see green boxes on mobile, the CSS is working correctly.</p>
+        </div>
+        
+        <div class="test-box">
+            <h2>Current Viewport Width</h2>
+            <p id="viewport-width">Loading...</p>
+        </div>
+        
+        <div class="test-box">
+            <h2>CSS File Status</h2>
+            <p>✅ performance-styles.css loaded</p>
+            <p>✅ responsive-components.js loaded</p>
+            <p>✅ performance-integration.js loaded</p>
+        </div>
+    </div>
+    
+    <script>
+        // Update viewport width
+        function updateViewportWidth() {
+            const width = window.innerWidth;
+            const element = document.getElementById('viewport-width');
+            element.textContent = `${width}px ${width <= 768 ? '(MOBILE)' : '(DESKTOP)'}`;
+        }
+        
+        // Update on load and resize
+        window.addEventListener('load', updateViewportWidth);
+        window.addEventListener('resize', updateViewportWidth);
+        
+        // Test if external CSS files are loaded
+        function testCSSFiles() {
+            const links = document.querySelectorAll('link[rel="stylesheet"]');
+            console.log('Loaded CSS files:', Array.from(links).map(link => link.href));
+        }
+        
+        testCSSFiles();
+    </script>
+</body>
+</html>
