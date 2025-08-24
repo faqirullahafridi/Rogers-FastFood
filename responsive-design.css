@@ -1,6 +1,38 @@
 /* ===== ULTIMATE RESPONSIVE DESIGN SYSTEM ===== */
 /* Roger's Restaurant - Works on ALL devices perfectly! */
 
+/* ===== CSS RESET FOR WHITE SPACE ELIMINATION ===== */
+/* This ensures NO white space appears anywhere */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100%;
+}
+
+body {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Ensure no elements create extra space */
+footer,
+footer *,
+.copyright,
+.copyright * {
+    margin-bottom: 0 !important;
+}
+
 /* CSS Custom Properties for Responsive Design */
 :root {
     /* Responsive Spacing System */
@@ -84,6 +116,8 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
 }
 
 /* ===== RESPONSIVE CONTAINER SYSTEM ===== */
@@ -281,9 +315,48 @@ small { font-size: var(--text-sm); line-height: 1.4; }
 }
 
 /* ===== RESPONSIVE FOOTER ===== */
-.footer {
+footer {
     padding: var(--space-xl) var(--space-md);
-    text-align: center;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+/* ===== GLOBAL WHITE SPACE PREVENTION ===== */
+/* Ensure no white space after footer on ANY device */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Remove any pseudo-elements that might create space */
+body::after,
+body::before,
+html::after,
+html::before {
+    display: none !important;
+}
+
+/* Ensure footer has no bottom spacing */
+footer {
+    margin-bottom: 0 !important;
+}
+
+/* Remove spacing from last child elements */
+footer *:last-child {
+    margin-bottom: 0 !important;
 }
 
 /* ===== TABLET STYLES (768px+) ===== */
@@ -321,8 +394,9 @@ small { font-size: var(--text-sm); line-height: 1.4; }
         min-height: 70vh;
     }
     
-    .footer {
+    footer {
         padding: var(--space-2xl) var(--space-lg);
+        margin-bottom: 0;
     }
 }
 
@@ -356,8 +430,9 @@ small { font-size: var(--text-sm); line-height: 1.4; }
         min-height: 80vh;
     }
     
-    .footer {
+    footer {
         padding: var(--space-2xl) var(--space-xl);
+        margin-bottom: 0;
     }
 }
 
@@ -431,7 +506,7 @@ small { font-size: var(--text-sm); line-height: 1.4; }
     }
     
     .hero {
-        min-height: auto;
+        min-height: 200px;
         padding: 2rem 0;
     }
 }
@@ -694,6 +769,8 @@ div[style*="background-color: red"] {
     /* Mobile body styles */
     body {
         overflow-x: hidden !important;
+        padding-bottom: 100px !important; /* Space for bottom navigation */
+        margin-bottom: 0 !important;
     }
     
     /* Prevent body scroll when mobile menu is open */
@@ -864,8 +941,8 @@ div[style*="background-color: red"] {
     }
     
     .logo-icon {
-        width: 40px !important;
-        height: 40px !important;
+        width: 55px !important;
+        height: 55px !important;
     }
     
     .logo-text {
@@ -874,11 +951,11 @@ div[style*="background-color: red"] {
     }
     
     .logo-main {
-        font-size: 1.2rem !important;
+        font-size: 1.4rem !important;
     }
     
     .logo-tagline {
-        font-size: 0.7rem !important;
+        font-size: 0.8rem !important;
     }
     
     /* Search and Mobile Menu Organization */
@@ -894,52 +971,42 @@ div[style*="background-color: red"] {
     }
     
     .mobile-menu-toggle {
-        display: block !important;
-        order: 2 !important;
-        margin-left: auto !important;
-        z-index: 10000 !important;
-        position: relative !important;
-        background: var(--primary) !important;
-        border: none !important;
-        border-radius: var(--radius-md) !important;
-        padding: var(--space-2) !important;
-        color: white !important;
-        cursor: pointer !important;
-        min-width: 44px !important;
-        min-height: 44px !important;
+        display: none !important;
     }
     
-    /* Mobile Navigation Menu */
+    /* Mobile Bottom Navigation Menu */
     .nav-items {
         position: fixed !important;
-        top: 0 !important;
+        bottom: 0 !important;
         left: 0 !important;
         right: 0 !important;
-        bottom: 0 !important;
-        background: rgba(0, 0, 0, 0.95) !important;
-        border-radius: 0 !important;
-        border: none !important;
-        box-shadow: none !important;
-        flex-direction: column !important;
-        gap: var(--space-4) !important;
-        padding: 80px var(--space-4) !important;
+        top: auto !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        backdrop-filter: blur(20px) !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+        border-radius: 20px 20px 0 0 !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1) !important;
+        flex-direction: row !important;
+        gap: 0 !important;
+        padding: var(--space-3) var(--space-2) calc(var(--space-3) + env(safe-area-inset-bottom)) !important;
         margin: 0 !important;
-        transform: translateX(-100%) !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
         z-index: 9999 !important;
-        justify-content: center !important;
+        justify-content: space-around !important;
         align-items: center !important;
         width: 100vw !important;
-        height: 100vh !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
+        height: auto !important;
+        min-height: 80px !important;
+        overflow: visible !important;
         box-sizing: border-box !important;
         transition: all 0.3s ease !important;
     }
     
     .nav-items.mobile-open {
-        transform: translateX(0) !important;
+        transform: translateY(0) !important;
         opacity: 1 !important;
         visibility: visible !important;
         pointer-events: auto !important;
@@ -961,90 +1028,61 @@ div[style*="background-color: red"] {
     }
     
     .nav-item {
-        font-size: 1.5rem !important;
-        padding: var(--space-4) var(--space-6) !important;
-        border-radius: var(--radius-lg) !important;
-        background: rgba(255, 255, 255, 0.15) !important;
-        width: 100% !important;
+        font-size: 0.8rem !important;
+        padding: var(--space-2) var(--space-1) !important;
+        border-radius: var(--radius-md) !important;
+        background: transparent !important;
+        width: auto !important;
         text-align: center !important;
-        max-width: 300px !important;
-        color: white !important;
+        max-width: none !important;
+        color: var(--primary) !important;
         text-decoration: none !important;
         display: flex !important;
+        flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        margin: var(--space-2) auto !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        margin: 0 !important;
+        border: none !important;
         transition: all 0.3s ease !important;
-        -webkit-backdrop-filter: blur(10px) !important;
-        backdrop-filter: blur(10px) !important;
-        min-height: 60px !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        min-height: 50px !important;
         line-height: 1.2 !important;
         font-weight: 600 !important;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7) !important;
+        text-shadow: none !important;
         cursor: pointer !important;
-        opacity: 0.9 !important;
+        opacity: 1 !important;
+        gap: var(--space-1) !important;
+        flex: 1 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
     }
     
     .nav-item:hover {
-        background: rgba(255, 255, 255, 0.3) !important;
+        background: rgba(228, 0, 43, 0.1) !important;
         transform: translateY(-2px) !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
-        border-color: rgba(255, 255, 255, 0.5) !important;
+        box-shadow: none !important;
+        border-color: transparent !important;
+        color: var(--primary) !important;
     }
     
-    /* HIGH CONTRAST MODE FOR MOBILE NAVIGATION */
-    .nav-items {
-        background: rgba(0, 0, 0, 0.98) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-    }
-    
-    .nav-item {
-        background: rgba(255, 255, 255, 0.2) !important;
-        border: 2px solid rgba(255, 255, 255, 0.4) !important;
-        color: #ffffff !important;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+    .nav-item.active {
+        background: rgba(228, 0, 43, 0.15) !important;
+        color: var(--primary) !important;
         font-weight: 700 !important;
     }
     
-    .nav-item:hover {
-        background: rgba(255, 255, 255, 0.4) !important;
-        border-color: rgba(255, 255, 255, 0.6) !important;
-        transform: translateY(-3px) scale(1.02) !important;
-        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6) !important;
-    }
+    /* Mobile Bottom Navigation - Clean modern style */
     
-    /* Mobile Menu Close Button */
+    /* Mobile Menu Close Button - Not needed for bottom nav */
     .mobile-menu-close {
-        position: absolute !important;
-        top: var(--space-4) !important;
-        right: var(--space-4) !important;
-        background: rgba(255, 255, 255, 0.1) !important;
-        border: none !important;
-        border-radius: 50% !important;
-        width: 44px !important;
-        height: 44px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        color: white !important;
-        cursor: pointer !important;
-        font-size: 1.5rem !important;
-        -webkit-backdrop-filter: blur(10px) !important;
-        backdrop-filter: blur(10px) !important;
-        z-index: 10001 !important;
+        display: none !important;
     }
     
-    .mobile-menu-close:hover {
-        background: rgba(255, 255, 255, 0.2) !important;
-        transform: scale(1.1) !important;
-    }
-    
-    /* Cart Icon Positioning */
+    /* Cart Icon Positioning - Moved up to avoid bottom nav */
     .cart-icon {
         position: fixed !important;
-        bottom: var(--space-4) !important;
+        bottom: 100px !important;
         right: var(--space-4) !important;
         z-index: 1002 !important;
         background: var(--primary) !important;
@@ -1105,7 +1143,7 @@ div[style*="background-color: red"] {
     }
     
     .menu-item {
-        min-height: auto !important;
+        min-height: 200px !important;
         width: 100% !important;
         max-width: none !important;
     }
@@ -1313,16 +1351,16 @@ div[style*="background-color: red"] {
     }
     
     .logo-icon {
-        width: 35px !important;
-        height: 35px !important;
+        width: 50px !important;
+        height: 50px !important;
     }
     
     .logo-main {
-        font-size: 1rem !important;
+        font-size: 1.3rem !important;
     }
     
     .logo-tagline {
-        font-size: 0.6rem !important;
+        font-size: 0.75rem !important;
     }
     
     .product-content {
@@ -1340,5 +1378,187 @@ div[style*="background-color: red"] {
     
     .products-container {
         padding: 0 var(--space-2) !important;
+    }
+    
+    /* ===== MOBILE FOOTER FIXES - Remove white space ===== */
+    footer {
+        padding: var(--space-6) var(--space-2) var(--space-6) !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-4) !important;
+        margin-bottom: var(--space-4) !important;
+    }
+    
+    .footer-section {
+        text-align: left !important;
+        padding: 0 !important;
+        margin-bottom: var(--space-4) !important;
+    }
+    
+    .footer-section h3 {
+        font-size: var(--text-lg) !important;
+        margin-bottom: var(--space-2) !important;
+        color: var(--text-light) !important;
+        font-weight: 600 !important;
+    }
+    
+    .footer-section p {
+        font-size: var(--text-sm) !important;
+        line-height: 1.5 !important;
+        margin-bottom: var(--space-2) !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+    
+    .footer-highlights {
+        margin-top: var(--space-3) !important;
+    }
+    
+    .footer-highlight {
+        display: flex !important;
+        align-items: center !important;
+        gap: var(--space-2) !important;
+        margin-bottom: var(--space-2) !important;
+        font-size: var(--text-sm) !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+    
+    .footer-highlight .icon {
+        color: var(--primary) !important;
+        font-size: 1rem !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .contact-item {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: var(--space-2) !important;
+        margin-bottom: var(--space-3) !important;
+        font-size: var(--text-sm) !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+    
+    .contact-item .icon {
+        color: var(--primary) !important;
+        font-size: 1rem !important;
+        margin-top: 2px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .service-item {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: var(--space-2) !important;
+        margin-bottom: var(--space-3) !important;
+    }
+    
+    .service-item .icon {
+        color: var(--primary) !important;
+        font-size: 1rem !important;
+        margin-top: 2px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .service-item div {
+        flex: 1 !important;
+    }
+    
+    .service-item strong {
+        display: block !important;
+        font-size: var(--text-sm) !important;
+        color: var(--text-light) !important;
+        margin-bottom: var(--space-1) !important;
+    }
+    
+    .service-item p {
+        font-size: var(--text-xs) !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+        margin: 0 !important;
+        line-height: 1.4 !important;
+    }
+    
+    .footer-cta {
+        width: 100% !important;
+        padding: var(--space-3) var(--space-4) !important;
+        font-size: var(--text-sm) !important;
+        margin-top: var(--space-3) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: var(--space-2) !important;
+    }
+    
+    .copyright {
+        text-align: center !important;
+        padding-top: var(--space-4) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        margin-top: var(--space-4) !important;
+        margin-bottom: 0 !important;
+    }
+    
+    .copyright p {
+        font-size: var(--text-xs) !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+        margin-bottom: var(--space-1) !important;
+        line-height: 1.4 !important;
+    }
+    
+    .copyright p:last-child {
+        margin-bottom: 0 !important;
+    }
+    
+    /* ===== AGGRESSIVE WHITE SPACE REMOVAL ===== */
+    /* Remove ALL possible white space after footer */
+    body::after,
+    html::after {
+        display: none !important;
+    }
+    
+    /* Ensure body and html have no bottom spacing */
+    body {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    
+    html {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    
+    /* Force footer to be the last element with no spacing */
+    footer {
+        margin-bottom: 0 !important;
+        padding-bottom: var(--space-6) !important;
+    }
+    
+    /* Remove any potential spacing from the last elements */
+    footer *:last-child {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    
+    /* Ensure viewport height is properly calculated */
+    body {
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    /* Make main content grow to fill space */
+    main, 
+    .main-content,
+    #root {
+        flex: 1 !important;
+    }
+    
+    /* Ensure footer sticks to bottom without extra space */
+    footer {
+        margin-top: auto !important;
+        flex-shrink: 0 !important;
     }
 }
